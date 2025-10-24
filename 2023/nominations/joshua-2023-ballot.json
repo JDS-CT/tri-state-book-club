@@ -1,0 +1,168 @@
+{
+  "year": 2023,
+  "voter": "Joshua",
+  "source_file": "2023 - Joshua - nominations.docx",
+  "submission_notes": "Directions requested ranked voting via email to blum.alfredo.x@gmail.com.",
+  "categories": [
+    {
+      "name": "Best Book",
+      "rankings": [
+        {
+          "rank": 1,
+          "title": "Ninth House"
+        },
+        {
+          "rank": 2,
+          "title": "Hell Bent"
+        },
+        {
+          "rank": 3,
+          "title": "Wicked"
+        },
+        {
+          "rank": 4,
+          "title": "Good Omens"
+        }
+      ]
+    },
+    {
+      "name": "Best Character",
+      "rankings": [
+        {
+          "rank": 1,
+          "name": "Alex",
+          "work": "Ninth House"
+        },
+        {
+          "rank": 2,
+          "name": "Elphaba",
+          "work": "Wicked"
+        }
+      ]
+    },
+    {
+      "name": "Worst Book",
+      "rankings": [
+        {
+          "rank": 1,
+          "title": "Fairy Tale"
+        },
+        {
+          "rank": 2,
+          "title": "Verity"
+        }
+      ]
+    },
+    {
+      "name": "Worst Character",
+      "rankings": [
+        {
+          "rank": 1,
+          "name": "Aton",
+          "work": "Hell Bent"
+        },
+        {
+          "rank": 2,
+          "name": "Flight Killer",
+          "work": "Fairy Tale"
+        }
+      ]
+    },
+    {
+      "name": "Best Plot Twist",
+      "rankings": [
+        {
+          "rank": 1,
+          "description": "Self-fulfilling time tear created by the protagonist",
+          "work": "Sea of Tranquility"
+        }
+      ]
+    },
+    {
+      "name": "Memorable Use of Imagery",
+      "rankings": [
+        {
+          "rank": 1,
+          "description": "Meta references to internal books with a soft fourth-wall break",
+          "work": "Sea of Tranquility"
+        },
+        {
+          "rank": 2,
+          "description": "Interdimensional transportation via wheel walking",
+          "work": "Hell Bent"
+        }
+      ]
+    },
+    {
+      "name": "Attractive Character",
+      "rankings": [
+        {
+          "rank": 1,
+          "name": "Alex Stern",
+          "work": "Ninth House"
+        }
+      ]
+    },
+    {
+      "name": "Supporting Character",
+      "rankings": [
+        {
+          "rank": 1,
+          "name": "Darlington",
+          "work": "Ninth House"
+        },
+        {
+          "rank": 2,
+          "name": "Trip",
+          "work": "Hell Bent"
+        }
+      ]
+    },
+    {
+      "name": "Original Concept",
+      "rankings": [
+        {
+          "rank": 1,
+          "title": "Nettle and Bone"
+        }
+      ]
+    },
+    {
+      "name": "Most Anticipated Before Reading",
+      "rankings": [
+        {
+          "rank": 1,
+          "title": "Hell Bent"
+        },
+        {
+          "rank": 2,
+          "title": "Fairy Tale"
+        }
+      ]
+    },
+    {
+      "name": "Most Memorable Book Club Moment",
+      "rankings": [
+        {
+          "rank": 1,
+          "description": "Pennsylvania trip photos"
+        }
+      ]
+    },
+    {
+      "name": "Best Book of All Time",
+      "context": "Includes previous book club books",
+      "rankings": [
+        {
+          "rank": 1,
+          "title": "Library at Mount Char"
+        },
+        {
+          "rank": 2,
+          "title": "Starless Sea"
+        }
+      ]
+    }
+  ],
+  "trailing_note": "Feature 1185836: FIB source management - periodic heating"
+}
