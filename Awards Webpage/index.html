@@ -19,15 +19,84 @@
   </div>
   <p id="ceremonySubtitle" class="subtitle"></p>
 </header>
+
+<nav class="tab-bar" role="tablist" aria-label="Awards navigation">
+  <button id="reveal-tab" type="button" class="tab-button active" data-view="reveal" role="tab" aria-selected="true" aria-controls="view-reveal">Awards Reveal</button>
+  <button id="nominations-tab" type="button" class="tab-button" data-view="nominations" role="tab" aria-selected="false" aria-controls="view-nominations">Nominations</button>
+  <button id="winners-tab" type="button" class="tab-button" data-view="winners" role="tab" aria-selected="false" aria-controls="view-winners">Winners &amp; Finalists</button>
+  <button id="data-tab" type="button" class="tab-button" data-view="data" role="tab" aria-selected="false" aria-controls="view-data">Data Exchange</button>
+  <button id="voting-tab" type="button" class="tab-button" data-view="voting" role="tab" aria-selected="false" aria-controls="view-voting">Ranked Voting</button>
+</nav>
+
 <main>
-  <div id="content" class="status-message">Select a year to load awards.</div>
-  <button id="revealButton" onclick="revealNext()" disabled>Reveal the Winner</button>
+  <section id="view-reveal" class="view view-active" role="tabpanel" aria-labelledby="reveal-tab">
+    <div id="content" class="status-message">Select a year to load awards.</div>
+    <button id="revealButton" onclick="revealNext()" disabled>Reveal the Winner</button>
+  </section>
+
+  <section id="view-nominations" class="view" role="tabpanel" aria-labelledby="nominations-tab" hidden>
+    <div class="view-header">
+      <h2>Nominations by Category</h2>
+      <p class="view-subtitle">Browse every nominated title for the selected year.</p>
+    </div>
+    <div id="nominationsContainer" class="panel"></div>
+  </section>
+
+  <section id="view-winners" class="view" role="tabpanel" aria-labelledby="winners-tab" hidden>
+    <div class="view-header">
+      <h2>Winners &amp; Finalists</h2>
+      <p class="view-subtitle">Quick reference for ceremony notes and recap emails.</p>
+    </div>
+    <div id="winnersContainer" class="panel"></div>
+  </section>
+
+  <section id="view-data" class="view" role="tabpanel" aria-labelledby="data-tab" hidden>
+    <div class="view-header">
+      <h2>Ranked Ballot Exchange Format</h2>
+      <p class="view-subtitle">Use this schema when importing Google Form results or exporting ballots from the site.</p>
+    </div>
+    <div class="panel">
+      <h3>Sample Exchange Payload</h3>
+      <pre id="exchangeSpec" class="code-block" aria-live="polite"></pre>
+    </div>
+    <div class="panel">
+      <h3>Validate an Imported File</h3>
+      <p class="view-subtitle">Drop a JSON file produced by Google Forms (after you convert column headers) to confirm it matches the schema.</p>
+      <input type="file" id="exchangeFileInput" accept="application/json,.json">
+      <div id="exchangeSummary" class="import-summary" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="view-voting" class="view" role="tabpanel" aria-labelledby="voting-tab" hidden>
+    <div class="view-header">
+      <h2>Ranked Choice Voting Prototype</h2>
+      <p class="view-subtitle">Collect preferences and export them directly into the standard exchange format.</p>
+    </div>
+    <form id="votingForm" class="panel">
+      <fieldset class="voter-info">
+        <legend>Voter Details</legend>
+        <label for="voterName">Name</label>
+        <input id="voterName" name="voterName" type="text" autocomplete="name" placeholder="Alex Reader">
+        <label for="voterEmail">Email</label>
+        <input id="voterEmail" name="voterEmail" type="email" autocomplete="email" placeholder="alex@example.com">
+      </fieldset>
+      <div id="votingCategories" class="voting-categories"></div>
+      <div class="form-actions">
+        <button type="button" id="generateBallot">Generate Ranked Ballot JSON</button>
+      </div>
+    </form>
+    <div class="panel">
+      <h3>Generated Ballot</h3>
+      <pre id="ballotOutput" class="code-block" aria-live="polite">Select a year and fill out the form to generate a ballot.</pre>
+    </div>
+  </section>
 </main>
 
 <audio id="explosionSound" src="audio/explosion.mp3"></audio>
 <audio id="winnerSound" src="audio/winner_fanfare.mp3"></audio>
 
 <script src="js/awardsLoader.js"></script>
+<script src="js/votingFormat.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
