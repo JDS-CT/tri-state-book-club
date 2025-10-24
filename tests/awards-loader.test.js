@@ -139,3 +139,40 @@ test('loadAwardsData falls back to an XMLHttpRequest implementation when fetch f
   assert.equal(payload.year, '2024');
   assert.equal(payload.categories.length > 0, true);
 });
+
+test('loadAwardsData bypasses fetch on file protocol and resolves via XHR fallback', async () => {
+  const originalFetch = global.fetch;
+  const originalLocation = global.location;
+  let fetchCallCount = 0;
+
+  const hangingFetch = () => {
+    fetchCallCount += 1;
+    return new Promise(() => {});
+  };
+
+  global.fetch = hangingFetch;
+  global.location = { protocol: 'file:' };
+
+  try {
+    const payload = await loader.loadAwardsData({
+      year: '2024',
+      xhrImpl: createFileBackedXhrFactory()
+    });
+
+    assert.equal(fetchCallCount, 0, 'fetch should be bypassed on file:// origins');
+    assert.equal(payload.year, '2024');
+    assert.equal(payload.categories.length > 0, true);
+  } finally {
+    if (typeof originalFetch === 'undefined') {
+      delete global.fetch;
+    } else {
+      global.fetch = originalFetch;
+    }
+
+    if (typeof originalLocation === 'undefined') {
+      delete global.location;
+    } else {
+      global.location = originalLocation;
+    }
+  }
+});

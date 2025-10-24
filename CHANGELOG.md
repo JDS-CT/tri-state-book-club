@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2025-10-24T21:23:10Z
+- fix: bypass hanging fetch on file origins – Updated `Awards Webpage/js/awardsLoader.js` to detect `file://` contexts and immediately use the resilient XHR path so ceremony data loads offline.
+- test: guard file-origin loader path – Added a node:test case in `tests/awards-loader.test.js` that stubs the global location and verifies no fetch attempts occur while 2024 data still loads.
+
 ## 2025-10-24T15:24:24Z
 - fix: add offline-friendly loader fallback – Updated `Awards Webpage/js/awardsLoader.js` to fall back to XMLHttpRequest when `fetch` is unavailable so the ceremony works over `file://` URLs.
 - test: cover loader fallback – Extended `tests/awards-loader.test.js` with an offline scenario harness that exercises the new XMLHttpRequest path.

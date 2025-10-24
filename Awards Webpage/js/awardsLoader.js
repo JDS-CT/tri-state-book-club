@@ -58,6 +58,37 @@
     return `${sanitizedBase}/${year}/reveal/awards.json`;
   }
 
+  function shouldBypassFetch(options) {
+    if (options && Object.prototype.hasOwnProperty.call(options, 'fetchImpl')) {
+      return false;
+    }
+
+    let locationLike = null;
+    if (options && options.location && typeof options.location === 'object') {
+      locationLike = options.location;
+    } else if (typeof globalThis !== 'undefined' && typeof globalThis.location === 'object') {
+      locationLike = globalThis.location;
+    }
+
+    if (!locationLike || typeof locationLike.protocol !== 'string') {
+      return false;
+    }
+
+    return locationLike.protocol.toLowerCase() === 'file:';
+  }
+
+  function resolveFetchImplementation(options) {
+    if (options && typeof options.fetchImpl === 'function') {
+      return options.fetchImpl;
+    }
+
+    if (shouldBypassFetch(options)) {
+      return null;
+    }
+
+    return typeof fetch === 'function' ? fetch : null;
+  }
+
   function resolveXhrFactory(options) {
     if (options && typeof options.xhrImpl === 'function') {
       return options.xhrImpl;
@@ -144,13 +175,13 @@
   }
 
   async function loadAwardsData(options) {
-    const { year, basePath, fetchImpl } = options || {};
+    const { year, basePath } = options || {};
 
     if (!year) {
       throw new TypeError('A year is required to load awards data.');
     }
 
-    const fetchFn = fetchImpl || (typeof fetch === 'function' ? fetch : null);
+    const fetchFn = resolveFetchImplementation(options);
     const xhrFactory = resolveXhrFactory(options);
 
     const candidates = [];
