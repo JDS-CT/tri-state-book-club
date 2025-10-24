@@ -11,5 +11,7 @@ TEST -- using AGENTS.md file
 ✅ [p2] Document annual awards workflow referencing `years/<year>/` archives.
 ✅ [p1] Restore awards loader support when running the site over file:// by adding a resilient fallback in `js/awardsLoader.js`.
 ✅ [p1] Add regression tests in `tests/awards-loader.test.js` covering the new offline-safe loading path.
+✅ [p1] Add embedded awards data fallback in `Awards Webpage/js/awardsLoader.js` so diagnostics recover when network access is blocked.
+✅ [p1] Extend `tests/awards-loader.test.js` to cover the embedded fallback success path and diagnostics events.
 🔲 [p3] Plan website updates so the awards site can surface multiple years with navigation and data-driven pages.
 🔲 [p4] Research and document tooling to assist with ranked-choice vote aggregation ahead of winner selection.

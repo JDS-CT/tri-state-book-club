@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2025-10-24T22:06:42Z
+- feat: embed awards fallback catalog – Added `Awards Webpage/js/embeddedAwardsData.js` with deep-frozen 2023-2025 ceremony data so offline diagnostics can recover.
+- fix: load embedded awards data when network strategies fail – Updated `Awards Webpage/js/awardsLoader.js` to consult the embedded catalog and emit detailed diagnostics events.
+- test: verify embedded fallback path – Extended `tests/awards-loader.test.js` with a node:test case that forces fetch/xhr failures and confirms the fallback loads successfully.
+
 ## 2025-10-24T21:23:10Z
 - fix: bypass hanging fetch on file origins – Updated `Awards Webpage/js/awardsLoader.js` to detect `file://` contexts and immediately use the resilient XHR path so ceremony data loads offline.
 - test: guard file-origin loader path – Added a node:test case in `tests/awards-loader.test.js` that stubs the global location and verifies no fetch attempts occur while 2024 data still loads.

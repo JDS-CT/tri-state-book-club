@@ -212,6 +212,51 @@ test('loadAwardsData emits diagnostics for successful fetch resolution', async (
   assert.equal(eventTypes.includes('load:complete'), true, 'expected load:complete event');
 });
 
+test('loadAwardsData uses embedded data when network strategies fail', async () => {
+  const channel = loader.createDiagnosticsChannel();
+  const embeddedData = {
+    '2024': {
+      year: '2024',
+      title: 'Embedded fallback awards',
+      categories: [
+        {
+          category: 'Embedded Category',
+          nominations: ['Fallback Nominee'],
+          winner: 'Fallback Winner',
+          runnerUp: 'Fallback Runner-up'
+        }
+      ]
+    }
+  };
+
+  const payload = await loader.loadAwardsData({
+    year: '2024',
+    fetchImpl: async () => {
+      throw new Error('fetch disabled');
+    },
+    xhrImpl: () => ({
+      open() {
+        throw new Error('XHR disabled');
+      }
+    }),
+    diagnostics: channel,
+    embeddedData
+  });
+
+  assert.equal(payload.year, '2024');
+  assert.equal(payload.title, 'Embedded fallback awards');
+  assert.deepEqual(payload.categories[0], {
+    category: 'Embedded Category',
+    nominations: ['Fallback Nominee'],
+    winner: 'Fallback Winner',
+    runnerUp: 'Fallback Runner-up'
+  });
+
+  const types = channel.entries.map(entry => entry.type);
+  assert.equal(types.includes('load:embedded-success'), true);
+  assert.equal(types.includes('load:failure'), false);
+});
+
 test('loadAwardsData logs failures when no strategy succeeds', async () => {
   const channel = loader.createDiagnosticsChannel();
 
