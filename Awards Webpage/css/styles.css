@@ -1,0 +1,86 @@
+body {
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    font-family: 'Roboto Slab', serif;
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  h1 {
+    margin-top: 50px;
+  }
+  
+  #content {
+    position: relative;
+    height: 400px;
+  }
+  
+  .nomination {
+    position: absolute;
+    top: calc(50% + var(--offsetY, 0px));
+    left: calc(50% + var(--offsetX, 0px));
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    font-size: 1.5em;
+    transition: all 1s ease-in-out;
+  }
+  
+  .nomination.explode {
+    animation: explode 2s forwards;
+  }
+  
+  @keyframes explode {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--x), var(--y)) scale(0.5);
+      opacity: 1;
+    }
+  }
+  
+  #category, #winner {
+    font-size: 2em;
+    margin: 20px;
+    opacity: 0;
+    transition: opacity 1s;
+  }
+  
+  #winner {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #ffcc00;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      text-shadow: 0 0 10px #ffcc00;
+    }
+    50% {
+      transform: scale(1.1);
+      text-shadow: 0 0 20px #ffcc00;
+    }
+    100% {
+      transform: scale(1);
+      text-shadow: 0 0 10px #ffcc00;
+    }
+  }
+  
+  #revealButton {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: #ffcc00;
+    color: #1e1e1e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 50px;
+  }
+  
+  #revealButton:hover {
+    background-color: #e6b800;
+  }
+  

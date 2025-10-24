@@ -1,0 +1,19 @@
+{
+  "year": 2025,
+  "generated": "2025-10-15 22:14",
+  "categories": [
+    { "name": "Best Book", "nominations": [] },
+    { "name": "Best Character", "nominations": [] },
+    { "name": "Worst Book", "nominations": [] },
+    { "name": "Worst Character", "nominations": [] },
+    { "name": "Best Plot Twist", "nominations": [] },
+    { "name": "Memorable Use of Imagery", "nominations": [] },
+    { "name": "Attractive Character", "nominations": [] },
+    { "name": "Supporting Character", "nominations": [] },
+    { "name": "Original Concept", "nominations": [] },
+    { "name": "Most Anticipated Before Reading", "nominations": [] },
+    { "name": "Most Memorable Book Club Moment", "nominations": [] },
+    { "name": "Best Book of All Time", "nominations": [] },
+    { "name": "Vote for book to be re-read this year", "nominations": [] }
+  ]
+}

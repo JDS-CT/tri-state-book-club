@@ -1,0 +1,84 @@
+{
+    "nominations": {
+      "Best Book": {
+        "Mister Magic": 3,
+        "The Three-Body Problem Series": 1,
+        "Intercepts": 1,
+        "The Last Murder at the End of the World": 1
+      },
+      "Best Character": {
+        "Val (Mister Magic)": 2,
+        "Wallfacer Luo Ji (The Dark Forest)": 1,
+        "Emory (The Last Murder at the End of the World)": 1,
+        "Joe (Intercepts)": 1,
+        "The Four-Dimensional Tombstone (The Three-Body Problem)": 1
+      },
+      "Worst Book": {
+        "Until the End of the World": 2,
+        "House of Roots and Ruin": 1,
+        "Intercepts": 1,
+        "The Mysterious Case of the Alperton Angels": 1
+      },
+      "Worst Character": {
+        "Constance (Intercepts)": 1,
+        "Mister Magic (Character)": 1,
+        "Mayor (Mister Magic)": 1,
+        "An Lui-(twitchy Guy with ticks)-The Calling": 1,
+        "Christopher-(Sara's Boyfriend following her everywhere)- The Calling": 2,
+        "Oliver Menzies (The Mysterious Case of the Alperton Angels)": 1
+      },
+      "Best Plot Twist": {
+        "Mister Magic - Revelation of the true nature of the children's show": 1,
+        "The Three-Body Problem Series - Luo Ji's hidden plan Luo Ji's not actually being as haggered as we were lead to believe, he had a better plan and had everyone convinced to dismiss him.": 1,
+        "Last murder at the end of the world - The villagers could walk through the fog": 1,
+        "The Calling - When the super ninja-like Chiocco ended up dying because she was crushed by a random rock.": 1,
+        "House of Roots and Ruin - Alexander Laurant's paralyzed by own father and tested on with his 2 secret brothers.": 1
+      },
+      "Memorable Use of Imagery": {
+        "Luo Ji's desert ordeal (The Three-Body Problem)": 1,
+        "Mirror reflections with Vesper Wright (Black Sheep)": 1,
+        "The in between world with caves of lit candles the Merrick watches over (Thirteenth Child)": 1,
+        "The world building in Three Body Problem for the VR game (The Three-Body Problem)": 1,
+        "The fire and brimstone imagery in Intercepts when the devil came to collect (Intercepts)": 1
+      },
+      "Attractive Character": {
+        "Alexander's Triplets (House of Roots and Ruin)": 2,
+        "Aa (Death's End)": 1,
+        "Isaac (protector) (Mister Magic)": 1,
+        "Maccabee (The Calling) - (6'5, tall dark and handsome)": 1,
+        "Prince Leopold (Thirteenth Child)": 1
+      },
+      "Supporting Character": {
+        "Aa (Death's End)": 1,
+        "Benji the Gay Cowboy (Until the End of the World)": 1,
+        "The Divided Ones (Thirteenth Child)": 1,
+        "Hilal (The Calling) Tried to get the players to work together peacefully at the beginning of Endgame": 1,
+        "Alexander Laurant (House of Roots and Ruin) Paralyzed but access to tons of power, turns his back on it to do what is right": 1
+      },
+      "Original Concept": {
+        "Intercepts": 2,
+        "Three Body Problem Series": 2,
+        "Mister Magic": 1,
+        "The Last Murder at the End of the World": 1
+      },
+      "Most Anticipated Before Reading": {
+        "The Last Murder at the End of the World": 3,
+        "The Three-Body Problem": 2,
+        "House of Roots and Ruin": 1
+      },
+      "Most Memorable Book Club Moment": {
+        "Sylvia's Miniature Houses": 2,
+        "Creating Images with GPT for Laughter": 1,
+        "Ivy Finally Cat-Free": 1,
+        "Losing the Election": 1,
+        "When Smith said he hates us and hates books (original)": 1,
+        "Smith's Declaration of Hatred (GPT re-wrote the above nomination like this...)": 1
+      },
+      "Best Book of All Time": {
+        "The Library at Mount Char": 3,
+        "The Starless Sea": 1,
+        "The 7½ Deaths of Evelyn Hardcastle": 1,
+        "Abhorsen": 1
+      }
+    }
+  }  
