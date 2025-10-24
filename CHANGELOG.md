@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2025-10-24T12:14:00Z
+- feat: complete p1 navigation views outline – Captured the tabbed layout blueprint in `docs/navigation-views.md` covering reveal, nominations, winners, data exchange, and voting prototypes.
+- feat: complete p1 awards UI refactor – Rebuilt `Awards Webpage/index.html` and `css/styles.css` with multi-tab navigation, panels, and accessibility improvements for ceremony content.
+- feat: complete p1 multi-view controller – Extended `Awards Webpage/js/script.js` with tab management, data-driven renderers, and a ranked voting prototype tied to the live awards dataset.
+- feat: complete p1 ranked ballot schema – Authored `docs/ranked-ballot-format.md` and the shared `js/votingFormat.js` helpers for importing/exporting ranked ballots.
+- feat: complete p2 voting helper tests – Added `tests/voting-format.test.js` to validate ballot creation, envelope export, and schema parsing workflows.
+
 ## 2025-10-24T10:22:46Z
 - feat: complete p1 memory-aid audit – Cataloged 2023 consolidated notes to define per-book outputs for legacy seasons.
 - feat: complete p1 memory-aid migration – Split 2023 notes and authored 2023/2024 memory aid files under the shared template.
