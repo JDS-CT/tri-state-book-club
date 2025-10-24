@@ -1,0 +1,214 @@
+{
+  "memory_aids": [
+    {
+      "title": "Poster Girl",
+      "author": "Veronica Roth",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/poster-girl.md",
+      "synopsis": "A former propaganda icon hunts for a missing child to earn freedom from the Delegation she once championed.",
+      "key_characters": ["Sonya Kantor", "Alexander Price", "Nova", "Grace Park"],
+      "notable_twist": "The Delegation harvested children while framing Sonya’s family as martyrs.",
+      "highlight": "Gritty Seattle ruins and hacked surveillance tech color Sonya’s redemption arc."
+    },
+    {
+      "title": "Sea of Tranquility",
+      "author": "Emily St. John Mandel",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/sea-of-tranquility.md",
+      "synopsis": "Timelines collide when a time agent investigates a recurring anomaly linking Earth, the Moon, and humanity’s future.",
+      "key_characters": ["Gaspery-Jacques Roberts", "Edwin St. Andrew", "Olive Llewellyn", "Zoey"],
+      "notable_twist": "Gaspery’s intervention creates the anomaly he is ordered to erase.",
+      "highlight": "The 2203 book tour and moon colony vignettes explore art after apocalypse."
+    },
+    {
+      "title": "The Extinction Trials",
+      "author": "A. G. Riddle",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/the-extinction-trials.md",
+      "synopsis": "Survivors trapped in a lethal experiment unravel memory wipes, killer machines, and a corporate plan for colonizing space.",
+      "key_characters": ["Owen", "Maya", "Caretaker Robots", "Dr. Sato"],
+      "notable_twist": "The “shelter” is a Venusian training ground grooming them as future oligarchs.",
+      "highlight": "A homicidal bus sequence and sacrificial plane crash reveal the trial’s stakes."
+    },
+    {
+      "title": "Fairy Tale",
+      "author": "Stephen King",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/fairy-tale.md",
+      "synopsis": "Teenager Charlie Reade inherits a portal to a cursed kingdom and fights to heal both the realm and his dog.",
+      "key_characters": ["Charlie Reade", "Mr. Bowditch", "Radar", "Leah", "Claudia"],
+      "notable_twist": "Charlie’s ally Elden—Flight Killer—feeds on despair until Charlie invokes ancient names.",
+      "highlight": "The sundial that repeatedly restores Radar gives the quest emotional urgency."
+    },
+    {
+      "title": "The Measure",
+      "author": "Nikki Erlick",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/the-measure.md",
+      "synopsis": "Boxes holding lifespan strings force friends and strangers to confront mortality, politics, and personal choice.",
+      "key_characters": ["Amie", "Ben", "Nina", "Hank", "Anthony Rollins"],
+      "notable_twist": "Ben and Amie die together in a car crash moments after embracing their love.",
+      "highlight": "Short-string support groups showcase empathy amid manufactured division."
+    },
+    {
+      "title": "Good Omens",
+      "author": "Neil Gaiman and Terry Pratchett",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/good-omens.md",
+      "synopsis": "An angel and a demon team up to avert the apocalypse after the Antichrist is misplaced at birth.",
+      "key_characters": ["Aziraphale", "Crowley", "Adam Young", "Anathema Device", "Newton Pulsifer"],
+      "notable_twist": "Adam refuses to trigger Armageddon, undoing Heaven and Hell’s scripted war.",
+      "highlight": "Deadpan humor about bureaucracy and prophecy keeps the end times whimsical."
+    },
+    {
+      "title": "Ninth House",
+      "author": "Leigh Bardugo",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/ninth-house.md",
+      "synopsis": "Yale freshman Alex Stern polices occult societies while chasing the truth behind a campus murder.",
+      "key_characters": ["Alex Stern", "Daniel Arlington", "Dawes", "Detective Turner", "Hellie"],
+      "notable_twist": "Darlington’s rescue reveals a demonic pact binding him to Alex.",
+      "highlight": "Ritual audits expose secret-society excesses with gritty urban fantasy detail."
+    },
+    {
+      "title": "The City of Dusk",
+      "author": "Tara Sim",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/the-city-of-dusk.md",
+      "synopsis": "Four magical heirs vie to reopen the gates to their gods while Nexus descends into necromantic chaos.",
+      "key_characters": ["Taesia Lastrider", "Risha Vakara", "Nox Laederic", "Angelica Lastrider", "Nicolas Tradius"],
+      "notable_twist": "The heirs’ ritual destabilizes Nexus, unleashing eldritch horrors instead of salvation.",
+      "highlight": "Intersecting queer romances and divine politics heighten the stakes."
+    },
+    {
+      "title": "Verity",
+      "author": "Colleen Hoover",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/verity.md",
+      "synopsis": "A ghostwriter uncovers a chilling manuscript suggesting a bestselling author murdered her own children.",
+      "key_characters": ["Lowen Ashleigh", "Jeremy Crawford", "Verity Crawford", "Crew Crawford", "April"],
+      "notable_twist": "Verity’s letter claims the manuscript was a writing exercise rather than confession.",
+      "highlight": "Claustrophobic house settings blur reality and manipulation."
+    },
+    {
+      "title": "Nettle and Bone",
+      "author": "T. Kingfisher",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/nettle-and-bone.md",
+      "synopsis": "Princess Marra completes impossible tasks, raises a bone dog, and allies with witches to save her sister from abuse.",
+      "key_characters": ["Marra", "Dust-Wife", "Fenris", "Kanya", "Bone Dog"],
+      "notable_twist": "Marra weaponizes kindness and cursed artifacts to kill the prince without damning herself.",
+      "highlight": "Found-family banter softens the story’s dark fairy-tale edges."
+    },
+    {
+      "title": "Wicked",
+      "author": "Gregory Maguire",
+      "club_year": 2023,
+      "path": "years/2023/books/memory-aids/wicked.md",
+      "synopsis": "Oz is retold through Elphaba Thropp’s radicalization against the Wizard’s authoritarian rule.",
+      "key_characters": ["Elphaba Thropp", "Glinda Upland", "Fiyero Tigelaar", "Nessarose Thropp", "The Wizard of Oz"],
+      "notable_twist": "Elphaba’s supposed villainy stems from political resistance, not inherent wickedness.",
+      "highlight": "Political satire reframes familiar Oz iconography with moral ambiguity."
+    },
+    {
+      "title": "Mister Magic",
+      "author": "Kiersten White",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/mister-magic.md",
+      "synopsis": "Former child stars reunite for a reboot and confront the cult-like children’s show that erased their memories.",
+      "key_characters": ["Val", "Isaac", "The Circle", "Mister Magic", "The Handler"],
+      "notable_twist": "The show’s benevolent facade masks a supernatural predator feeding on belief.",
+      "highlight": "Desert compound imagery contrasts nostalgia with creeping dread."
+    },
+    {
+      "title": "The Three-Body Problem Series",
+      "author": "Liu Cixin",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/the-three-body-problem-series.md",
+      "synopsis": "Humanity negotiates, then battles, an alien civilization through centuries of science, strategy, and sacrifice.",
+      "key_characters": ["Ye Wenjie", "Wang Miao", "Luo Ji", "Cheng Xin", "Shi Qiang"],
+      "notable_twist": "Luo Ji’s dark forest deterrence holds the Trisolarans at bay—until compassion reopens danger.",
+      "highlight": "VR game sequences and cosmic engineering feats expand the saga’s scope."
+    },
+    {
+      "title": "Intercepts",
+      "author": "T. J. Payne",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/intercepts.md",
+      "synopsis": "A clandestine lab’s astral-projection experiments invite demonic bargaining and psychological collapse.",
+      "key_characters": ["Joe Gerhardt", "Constance Gerhardt", "Dr. Edward Stamm", "The Entity", "Reverend Paul"],
+      "notable_twist": "Joe’s “ally” in the beyond demands a brutal sacrifice to spare his family.",
+      "highlight": "Hellfire imagery and body-horror set pieces drive the dread."
+    },
+    {
+      "title": "The Last Murder at the End of the World",
+      "author": "Stuart Turton",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/the-last-murder-at-the-end-of-the-world.md",
+      "synopsis": "An isolated island community must solve a murder without the help of the AI that kept them safe from encroaching fog.",
+      "key_characters": ["Emory", "Hythe", "Harmony", "Clive", "The Flock"],
+      "notable_twist": "The villagers could walk through the fog all along—their fear was the true prison.",
+      "highlight": "Fragmented timelines and AI memory gaps layer the mystery."
+    },
+    {
+      "title": "Until the End of the World",
+      "author": "Sarah Lyons Fleming",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/until-the-end-of-the-world.md",
+      "synopsis": "Cassie Forrest shepherds friends across a zombie-ravaged America while clinging to hope and chosen family.",
+      "key_characters": ["Cassie Forrest", "Adrian Kline", "Peter", "Benji", "Nell"],
+      "notable_twist": "Hard-won sanctuary is shattered when old flames resurface infected.",
+      "highlight": "Road-trip camaraderie balances bleak undead encounters."
+    },
+    {
+      "title": "The Mysterious Case of the Alperton Angels",
+      "author": "Janice Hallett",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/the-mysterious-case-of-the-alperton-angels.md",
+      "synopsis": "An investigative writer reopens a cult case through emails and transcripts, racing rivals to protect a now-teenage survivor.",
+      "key_characters": ["Amanda Bailey", "Oliver Menzies", "Gideon", "Holly", "Gabriel Angelis"],
+      "notable_twist": "The so-called Antichrist baby is alive, hidden, and still being hunted by believers.",
+      "highlight": "Mixed-media storytelling keeps the mystery kinetic."
+    },
+    {
+      "title": "House of Roots and Ruin",
+      "author": "Erin A. Craig",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/house-of-roots-and-ruin.md",
+      "synopsis": "Verity Thaumas becomes companion to a reclusive family whose botanical experiments blur life and death.",
+      "key_characters": ["Verity Thaumas", "Alexander Blanchard", "The Triplets", "Laurette Blanchard", "Lord Blanchard"],
+      "notable_twist": "Alexander’s father paralyzes his own sons to perfect a lineage of obedient heirs.",
+      "highlight": "Gothic greenhouses and poisonous blooms shape the atmosphere."
+    },
+    {
+      "title": "The Calling",
+      "author": "James Frey and Nils Johnson-Shelton",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/the-calling.md",
+      "synopsis": "Global teen combatants hunt Endgame keys, forming fragile alliances before being forced to kill.",
+      "key_characters": ["Sarah Alopay", "Christopher Vandersloot", "An Liu", "Hilal ibn Isa al-Salt", "Chi'kcoe"],
+      "notable_twist": "Elite fighter Chi'kcoe dies from a random rockfall, proving no Player is safe.",
+      "highlight": "Scavenger-hunt puzzles blend ancient myth with modern tech."
+    },
+    {
+      "title": "Thirteenth Child",
+      "author": "Patricia C. Wrede",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/thirteenth-child.md",
+      "synopsis": "Eff Rothmer, branded unlucky, studies frontier magic to save settlements from supernatural plagues.",
+      "key_characters": ["Eff Rothmer", "Lan", "Professor Callis", "Wash Morris", "Avrupan Teachers"],
+      "notable_twist": "Eff’s feared destructive magic becomes the cure for the blight threatening Mill City.",
+      "highlight": "Candlelit liminal spaces show the frontier’s uncanny dangers."
+    },
+    {
+      "title": "Black Sheep",
+      "author": "Rachel Harrison",
+      "club_year": 2024,
+      "path": "years/2024/books/memory-aids/black-sheep.md",
+      "synopsis": "A prodigal daughter returns to her family’s cult-like church and confronts mirrored omens and buried secrets.",
+      "key_characters": ["Vesper Wright", "Rosie", "Mariana", "Mother Magdalene", "Dahlia"],
+      "notable_twist": "Vesper’s family intends to offer her as a sacrifice to cement their power.",
+      "highlight": "Mirror imagery doubles Vesper’s fractured identity and dread."
+    }
+  ]
+}
