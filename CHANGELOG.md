@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2025-10-24T14:57:39Z
+- fix: restore awards loader fallback – Updated `Awards Webpage/js/awardsLoader.js` with multi-path retries and added regression coverage so the ceremony can recover 2024 data when relative directories differ.
+- feat: background awards word cloud – Added `js/backgroundWords.js`, animated styling, and DOM updates so completed nominations and winners drift across the backdrop for the selected year and earlier.
+
 ## 2025-10-24T12:14:00Z
 - feat: complete p1 navigation views outline – Captured the tabbed layout blueprint in `docs/navigation-views.md` covering reveal, nominations, winners, data exchange, and voting prototypes.
 - feat: complete p1 awards UI refactor – Rebuilt `Awards Webpage/index.html` and `css/styles.css` with multi-tab navigation, panels, and accessibility improvements for ceremony content.
