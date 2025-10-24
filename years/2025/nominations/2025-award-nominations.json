@@ -1,19 +1,85 @@
 {
-  "year": 2025,
-  "generated": "2025-10-15 22:14",
+  "season": 2025,
+  "generated_at": "2025-10-15T22:14:00Z",
+  "source_form": "2025-ms-forms-nominations",
   "categories": [
-    { "name": "Best Book", "nominations": [] },
-    { "name": "Best Character", "nominations": [] },
-    { "name": "Worst Book", "nominations": [] },
-    { "name": "Worst Character", "nominations": [] },
-    { "name": "Best Plot Twist", "nominations": [] },
-    { "name": "Memorable Use of Imagery", "nominations": [] },
-    { "name": "Attractive Character", "nominations": [] },
-    { "name": "Supporting Character", "nominations": [] },
-    { "name": "Original Concept", "nominations": [] },
-    { "name": "Most Anticipated Before Reading", "nominations": [] },
-    { "name": "Most Memorable Book Club Moment", "nominations": [] },
-    { "name": "Best Book of All Time", "nominations": [] },
-    { "name": "Vote for book to be re-read this year", "nominations": [] }
+    {
+      "id": "best-book",
+      "label": "Best Book",
+      "prompt": "Best Book",
+      "nominations": []
+    },
+    {
+      "id": "best-character",
+      "label": "Best Character",
+      "prompt": "Best Character",
+      "nominations": []
+    },
+    {
+      "id": "worst-book",
+      "label": "Worst Book",
+      "prompt": "Worst Book",
+      "nominations": []
+    },
+    {
+      "id": "worst-character",
+      "label": "Worst Character",
+      "prompt": "Worst Character",
+      "nominations": []
+    },
+    {
+      "id": "best-plot-twist",
+      "label": "Best Plot Twist",
+      "prompt": "Best Plot Twist",
+      "nominations": []
+    },
+    {
+      "id": "memorable-use-of-imagery",
+      "label": "Memorable Use of Imagery",
+      "prompt": "Memorable Use of Imagery",
+      "nominations": []
+    },
+    {
+      "id": "attractive-character",
+      "label": "Attractive Character",
+      "prompt": "Attractive Character",
+      "nominations": []
+    },
+    {
+      "id": "supporting-character",
+      "label": "Supporting Character",
+      "prompt": "Supporting Character",
+      "nominations": []
+    },
+    {
+      "id": "original-concept",
+      "label": "Original Concept",
+      "prompt": "Original Concept",
+      "nominations": []
+    },
+    {
+      "id": "most-anticipated-before-reading",
+      "label": "Most Anticipated Before Reading",
+      "prompt": "Most Anticipated Before Reading",
+      "nominations": []
+    },
+    {
+      "id": "most-memorable-book-club-moment",
+      "label": "Most Memorable Book Club Moment",
+      "prompt": "Most Memorable Book Club Moment",
+      "nominations": []
+    },
+    {
+      "id": "best-book-all-time",
+      "label": "Best Book (All book club years)",
+      "prompt": "Best Book (All book club years)",
+      "nominations": []
+    },
+    {
+      "id": "book-to-re-read",
+      "label": "Book to re-read (All book club years)",
+      "prompt": "Book to re-read (All book club years)",
+      "nominations": []
+    }
   ]
 }
