@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2025-10-24T04:05:00Z
+- feat: define shared data schemas – Documented normalized nominations, ranked results, and raw submission exports, plus reorganized 2025 memory aids under the new template.
+
 ## 2025-10-24T03:15:00Z
 - feat: complete p1 archive restructure – Created the `years/` hierarchy with standardized per-year subfolders, migrated existing materials, and refreshed docs/links to the new paths.
 
