@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2025-10-24T15:24:24Z
+- fix: add offline-friendly loader fallback – Updated `Awards Webpage/js/awardsLoader.js` to fall back to XMLHttpRequest when `fetch` is unavailable so the ceremony works over `file://` URLs.
+- test: cover loader fallback – Extended `tests/awards-loader.test.js` with an offline scenario harness that exercises the new XMLHttpRequest path.
+
 ## 2025-10-24T14:57:39Z
 - fix: restore awards loader fallback – Updated `Awards Webpage/js/awardsLoader.js` with multi-path retries and added regression coverage so the ceremony can recover 2024 data when relative directories differ.
 - feat: background awards word cloud – Added `js/backgroundWords.js`, animated styling, and DOM updates so completed nominations and winners drift across the backdrop for the selected year and earlier.
