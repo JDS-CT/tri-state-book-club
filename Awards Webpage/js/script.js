@@ -9,6 +9,8 @@ const tabButtons = {};
 const MAX_RANK_OPTIONS = 3;
 let exchangeImportInitialized = false;
 let votingFormInitialized = false;
+const awardsCache = new Map();
+let backgroundUpdateToken = 0;
 
 const viewRenderers = {
   reveal: () => {},
@@ -43,6 +45,125 @@ function toPlainText(value) {
     return '';
   }
   return value.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+}
+
+function rememberAwardsPayload(payload, fallbackYear) {
+  if (!payload || typeof payload !== 'object') {
+    return;
+  }
+  const canonicalYear = payload.year || fallbackYear;
+  if (canonicalYear) {
+    const key = String(canonicalYear);
+    awardsCache.set(key, payload);
+  }
+}
+
+function getEligibleYears(maxYear) {
+  const numericMax = Number.parseInt(String(maxYear), 10);
+  if (!Number.isFinite(numericMax)) {
+    return [];
+  }
+
+  const select = document.getElementById('yearSelect');
+  if (!select) {
+    return [];
+  }
+
+  return Array.from(select.options)
+    .map(option => Number.parseInt(option.value, 10))
+    .filter(value => Number.isFinite(value) && value <= numericMax);
+}
+
+function renderBackgroundWordCloud(words, container) {
+  container.innerHTML = '';
+  if (!Array.isArray(words) || !words.length) {
+    return;
+  }
+
+  const pool = words.slice();
+  for (let i = pool.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+
+  const limit = Math.min(pool.length, 60);
+  const fragment = document.createDocumentFragment();
+
+  for (let index = 0; index < limit; index += 1) {
+    const word = pool[index];
+    const span = document.createElement('span');
+    span.className = 'background-word';
+    span.textContent = word;
+
+    span.style.left = `${Math.random() * 100}%`;
+    span.style.top = `${Math.random() * 100}%`;
+    span.style.setProperty('--dx', `${(Math.random() * 60 - 30).toFixed(2)}vw`);
+    span.style.setProperty('--dy', `${(Math.random() * 60 - 30).toFixed(2)}vh`);
+    span.style.setProperty('--duration', `${(16 + Math.random() * 12).toFixed(2)}s`);
+    span.style.setProperty('--delay', `${(Math.random() * 8).toFixed(2)}s`);
+    span.style.setProperty('--scale', `${(0.8 + Math.random() * 0.7).toFixed(2)}`);
+    span.style.setProperty('--opacity', `${(0.3 + Math.random() * 0.35).toFixed(2)}`);
+
+    fragment.appendChild(span);
+  }
+
+  container.appendChild(fragment);
+}
+
+async function updateBackgroundWordCloud(year, token) {
+  const container = document.getElementById('backgroundWords');
+  if (!container || typeof BackgroundWords === 'undefined') {
+    return;
+  }
+
+  const eligibleYears = getEligibleYears(year);
+  if (!eligibleYears.length) {
+    if (token === backgroundUpdateToken) {
+      container.innerHTML = '';
+    }
+    return;
+  }
+
+  eligibleYears.sort((a, b) => a - b);
+
+  for (const value of eligibleYears) {
+    const key = String(value);
+    if (awardsCache.has(key)) {
+      continue;
+    }
+    try {
+      const payload = await AwardsLoader.loadAwardsData({ year: key });
+      rememberAwardsPayload(payload, key);
+    } catch (error) {
+      console.warn(`Background preload failed for ${key}:`, error);
+    }
+    if (token !== backgroundUpdateToken) {
+      return;
+    }
+  }
+
+  if (token !== backgroundUpdateToken) {
+    return;
+  }
+
+  const words = BackgroundWords.collectWordsFromAwards({
+    awardsByYear: awardsCache,
+    maxYear: year
+  });
+
+  if (token !== backgroundUpdateToken) {
+    return;
+  }
+
+  renderBackgroundWordCloud(words, container);
+}
+
+function requestBackgroundUpdate(year) {
+  backgroundUpdateToken += 1;
+  const token = backgroundUpdateToken;
+  updateBackgroundWordCloud(year, token).catch(error => {
+    console.error('Background word update failed:', error);
+  });
 }
 
 function getCategoryNames() {
@@ -528,8 +649,11 @@ async function loadYearData(year) {
     ceremonyTitle = payload.title || '';
     currentIndex = 0;
 
+    rememberAwardsPayload(payload, year);
+
     updateSubtitle();
     refreshAllViews();
+    requestBackgroundUpdate(activeYear);
 
     if (!awards.length) {
       setStatusMessage('No awards have been recorded for this year yet.');

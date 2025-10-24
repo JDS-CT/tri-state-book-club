@@ -39,3 +39,34 @@ test('loadAwardsData returns normalized winners for the requested year', async (
     runnerUp: '<i>The Three-Body Problem Series</i>'
   });
 });
+
+test('loadAwardsData retries with alternate base paths when the default lookup fails', async () => {
+  const attempts = [];
+
+  async function fallbackFetch(resource) {
+    attempts.push(resource);
+    if (resource.startsWith('../years/')) {
+      return { ok: false };
+    }
+    if (resource.startsWith('./years/')) {
+      return fileFetch(resource.replace(/^\.\//, ''));
+    }
+    if (resource.startsWith('years/')) {
+      return fileFetch(resource);
+    }
+    throw new Error(`Unexpected resource request: ${resource}`);
+  }
+
+  const payload = await loader.loadAwardsData({
+    year: '2024',
+    fetchImpl: fallbackFetch
+  });
+
+  assert.equal(attempts[0], '../years/2024/reveal/awards.json');
+  assert.ok(
+    attempts.slice(1).some(candidate => candidate.includes('/years/2024/reveal/awards.json')),
+    `Expected a retry using an alternate years directory, saw ${attempts.join(', ')}`
+  );
+  assert.equal(payload.year, '2024');
+  assert.equal(payload.categories.length > 0, true);
+});
