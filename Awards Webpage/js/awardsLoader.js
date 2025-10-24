@@ -180,6 +180,114 @@
     return channel;
   }
 
+
+  function normalizeEmbeddedCandidate(candidate) {
+    if (!candidate) {
+      return null;
+    }
+    if (typeof candidate === 'function') {
+      try {
+        return normalizeEmbeddedCandidate(candidate());
+      } catch (_) {
+        return null;
+      }
+    }
+    return candidate;
+  }
+
+  function resolveEmbeddedCatalog(options) {
+    if (options && Object.prototype.hasOwnProperty.call(options, 'embeddedData')) {
+      const normalized = normalizeEmbeddedCandidate(options.embeddedData);
+      if (normalized) {
+        return { catalog: normalized, source: 'options' };
+      }
+    }
+
+    if (typeof globalThis !== 'undefined') {
+      const globalCandidates = [
+        globalThis.AwardsEmbeddedData,
+        globalThis.EmbeddedAwardsData,
+        globalThis.embeddedAwardsData,
+        globalThis.AwardsData && globalThis.AwardsData.embedded
+      ];
+
+      for (const candidate of globalCandidates) {
+        const normalized = normalizeEmbeddedCandidate(candidate);
+        if (normalized) {
+          return { catalog: normalized, source: 'global' };
+        }
+      }
+    }
+
+    return null;
+  }
+
+  function extractEmbeddedEntry(catalog, year) {
+    if (!catalog) {
+      return null;
+    }
+
+    const key = String(year);
+    const alternateKeys = [key];
+    if (typeof year === 'number' || /^(\d+)$/.test(key)) {
+      const numeric = Number.parseInt(key, 10);
+      if (Number.isFinite(numeric) && !alternateKeys.includes(numeric)) {
+        alternateKeys.push(numeric);
+      }
+    }
+
+    if (typeof catalog.get === 'function') {
+      for (const candidateKey of alternateKeys) {
+        try {
+          const value = catalog.get(candidateKey);
+          if (value !== undefined) {
+            return value;
+          }
+        } catch (_) {
+          // ignore lookup errors
+        }
+      }
+    }
+
+    if (typeof catalog.entries === 'function') {
+      try {
+        for (const entry of catalog.entries()) {
+          if (!entry || typeof entry !== 'object') {
+            continue;
+          }
+          const [entryKey, value] = Array.isArray(entry) ? entry : [entry.key, entry.value];
+          if (alternateKeys.some(candidateKey => String(entryKey) === String(candidateKey))) {
+            return value;
+          }
+        }
+      } catch (_) {
+        // ignore iteration errors
+      }
+    }
+
+    if (catalog.data && typeof catalog.data === 'object') {
+      const value = extractEmbeddedEntry(catalog.data, year);
+      if (value !== null) {
+        return value;
+      }
+    }
+
+    if (catalog.byYear && typeof catalog.byYear === 'object') {
+      const value = extractEmbeddedEntry(catalog.byYear, year);
+      if (value !== null) {
+        return value;
+      }
+    }
+
+    for (const candidateKey of alternateKeys) {
+      if (Object.prototype.hasOwnProperty.call(catalog, candidateKey)) {
+        return catalog[candidateKey];
+      }
+    }
+
+    return null;
+  }
+
   function resolveDiagnostics(input) {
     if (!input) {
       return { log() {} };
@@ -340,6 +448,23 @@
           diagnostics.log('load:xhr-error', { resource, message: error && error.message });
           lastError = error;
         }
+      }
+    }
+
+    const embedded = resolveEmbeddedCatalog(options);
+    if (embedded) {
+      const fallback = extractEmbeddedEntry(embedded.catalog, year);
+      if (fallback) {
+        try {
+          const normalized = normalizeAwardsData(fallback);
+          diagnostics.log('load:embedded-success', { year, source: embedded.source });
+          return normalized;
+        } catch (error) {
+          diagnostics.log('load:embedded-error', { year, message: error && error.message });
+          lastError = error;
+        }
+      } else {
+        diagnostics.log('load:embedded-miss', { year, source: embedded.source });
       }
     }
 
