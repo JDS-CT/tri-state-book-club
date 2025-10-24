@@ -11,6 +11,9 @@
 - feat: centralize awards reveal assets – Created `reveal/` directories for each year with archived HTML, JSON exports, and placeholders for upcoming media, plus documented the ceremony workflow.
 - feat: data-driven awards webpage – Refactored the awards site to load per-year JSON via a shared loader module, refreshed the template controls, and added a regression test for the loader.
 
+## 2025-10-24T10:29:58Z
+- feat: complete p2 annual awards workflow doc – Authored `docs/workflows/annual-awards.md` detailing nomination, tally, reveal, and archive steps with pointers to `years/<year>/` assets.
+
 ## 2025-10-24T04:05:00Z
 - feat: define shared data schemas – Documented normalized nominations, ranked results, and raw submission exports, plus reorganized 2025 memory aids under the new template.
 
