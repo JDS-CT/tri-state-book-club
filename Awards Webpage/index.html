@@ -29,6 +29,23 @@
   <button id="voting-tab" type="button" class="tab-button" data-view="voting" role="tab" aria-selected="false" aria-controls="view-voting">Ranked Voting</button>
 </nav>
 
+<section id="diagnosticsPanel" class="diagnostics-panel" aria-live="polite">
+  <h2>Diagnostics Console</h2>
+  <p class="view-subtitle">Run targeted checks and copy the output below when reporting issues.</p>
+  <div class="diagnostics-actions">
+    <button type="button" data-diagnostics-action="reload">Reload Selected Year</button>
+    <button type="button" data-diagnostics-action="force-fetch">Force Fetch Only</button>
+    <button type="button" data-diagnostics-action="force-xhr">Force XHR Fallback</button>
+    <button type="button" data-diagnostics-action="simulate-failure">Simulate Failure</button>
+    <button type="button" data-diagnostics-action="show-cache">Show Cached Years</button>
+    <button type="button" data-diagnostics-action="copy-log">Copy Log</button>
+    <button type="button" data-diagnostics-action="clear-log">Clear Log</button>
+  </div>
+  <p id="diagnosticsStatus" class="diagnostics-status" data-role="diagnostics-status" aria-live="polite"></p>
+  <p class="diagnostics-hint" data-role="diagnostics-copy">Click Copy Log or select the text manually.</p>
+  <pre id="diagnosticsOutput" class="code-block diagnostics-output" data-role="diagnostics-output" aria-live="polite">No diagnostics recorded yet.</pre>
+</section>
+
 <main>
   <section id="view-reveal" class="view view-active" role="tabpanel" aria-labelledby="reveal-tab">
     <div id="content" class="status-message">Select a year to load awards.</div>
@@ -97,6 +114,7 @@
 <audio id="winnerSound" src="audio/winner_fanfare.mp3"></audio>
 
 <script src="js/awardsLoader.js"></script>
+<script src="js/diagnosticsConsole.js"></script>
 <script src="js/votingFormat.js"></script>
 <script src="js/backgroundWords.js"></script>
 <script src="js/script.js"></script>
