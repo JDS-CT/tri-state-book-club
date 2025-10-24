@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2025-10-24T05:10:00Z
+- feat: centralize awards reveal assets – Created `reveal/` directories for each year with archived HTML, JSON exports, and placeholders for upcoming media, plus documented the ceremony workflow.
+- feat: data-driven awards webpage – Refactored the awards site to load per-year JSON via a shared loader module, refreshed the template controls, and added a regression test for the loader.
+
 ## 2025-10-24T04:05:00Z
 - feat: define shared data schemas – Documented normalized nominations, ranked results, and raw submission exports, plus reorganized 2025 memory aids under the new template.
 

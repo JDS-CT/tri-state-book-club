@@ -7,15 +7,27 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<header>
+  <h1>Book Club Awards Ceremony</h1>
+  <div class="controls">
+    <label for="yearSelect">Ceremony Year:</label>
+    <select id="yearSelect">
+      <option value="2025">2025</option>
+      <option value="2024" selected>2024</option>
+      <option value="2023">2023</option>
+    </select>
+  </div>
+  <p id="ceremonySubtitle" class="subtitle"></p>
+</header>
+<main>
+  <div id="content" class="status-message">Select a year to load awards.</div>
+  <button id="revealButton" onclick="revealNext()" disabled>Reveal the Winner</button>
+</main>
 
-<h1>Book Club Awards Ceremony</h1>
-<div id="content"></div>
-<button id="revealButton" onclick="revealNext()">Reveal the Winner</button>
-
-<!-- Audio elements for sound effects -->
 <audio id="explosionSound" src="audio/explosion.mp3"></audio>
 <audio id="winnerSound" src="audio/winner_fanfare.mp3"></audio>
 
+<script src="js/awardsLoader.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
