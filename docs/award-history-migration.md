@@ -4,7 +4,7 @@ This workflow explains how to migrate legacy `.docx` award history into reposito
 
 ## 1. Inventory Existing Sources
 1. List every historical `.docx` artifact and capture high-level metadata (year, author, document purpose).
-2. Decide on the destination structure (for example, `YEAR/reading/` for reading notes and `YEAR/nominations/` for ballots).
+2. Decide on the destination structure (for example, `years/YEAR/books/` for reading notes and `years/YEAR/nominations/` for ballots).
 3. Capture the original file names in the metadata of the converted records for traceability.
 
 ## 2. Extract Raw Text
@@ -19,7 +19,7 @@ This workflow explains how to migrate legacy `.docx` award history into reposito
 4. Carry over any instructions or submission notes from the document into dedicated metadata fields (such as `submission_notes`).
 
 ## 4. Write Canonical Files
-1. Create the target directory if it does not exist (e.g., `2023/reading/` or `2023/nominations/`).
+1. Create the target directory if it does not exist (e.g., `years/2023/books/` or `years/2023/nominations/`).
 2. Store narrative summaries as Markdown (`*.md`) and structured ballots as JSON (`*.json`).
 3. Include a trailing newline and UTF-8 encoding for all files.
 
