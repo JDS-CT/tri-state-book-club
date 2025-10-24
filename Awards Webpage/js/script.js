@@ -11,6 +11,8 @@ let exchangeImportInitialized = false;
 let votingFormInitialized = false;
 const awardsCache = new Map();
 let backgroundUpdateToken = 0;
+let diagnosticsChannel = null;
+let diagnosticsConsoleInstance = null;
 
 const viewRenderers = {
   reveal: () => {},
@@ -630,7 +632,8 @@ function revealNext() {
   }, 2000);
 }
 
-async function loadYearData(year) {
+async function loadYearData(year, runtimeOptions = {}) {
+  const { loaderOverrides = {}, statusMessage = null, propagateError = false } = runtimeOptions;
   const revealButton = document.getElementById('revealButton');
   if (!revealButton) {
     throw new Error('Reveal button missing from the page.');
@@ -642,8 +645,17 @@ async function loadYearData(year) {
   revealButton.style.cursor = 'default';
   setStatusMessage('Loading awards, please stand by.');
 
+  if (diagnosticsChannel) {
+    const overrideKeys = Object.keys(loaderOverrides);
+    diagnosticsChannel.log('ui:load-request', {
+      year,
+      overrides: overrideKeys.length ? overrideKeys : ['default']
+    });
+  }
+
   try {
-    const payload = await AwardsLoader.loadAwardsData({ year });
+    const loaderOptions = Object.assign({ year, diagnostics: diagnosticsChannel }, loaderOverrides);
+    const payload = await AwardsLoader.loadAwardsData(loaderOptions);
     awards = payload.categories;
     activeYear = payload.year || year;
     ceremonyTitle = payload.title || '';
@@ -668,6 +680,24 @@ async function loadYearData(year) {
     revealButton.style.backgroundColor = '#ffcc00';
     revealButton.style.cursor = 'pointer';
     revealButton.textContent = 'Reveal the Winner';
+
+    if (diagnosticsChannel) {
+      diagnosticsChannel.log('ui:load-success', {
+        year: activeYear,
+        categories: awards.length,
+        overrides: Object.keys(loaderOverrides)
+      });
+    }
+
+    if (diagnosticsConsoleInstance) {
+      const message = statusMessage || `Loaded awards for ${activeYear}.`;
+      diagnosticsConsoleInstance.setStatus(message);
+    }
+
+    if (statusMessage) {
+      return { message: statusMessage };
+    }
+    return { message: `Loaded awards for ${activeYear}.` };
   } catch (error) {
     console.error(error);
     awards = [];
@@ -676,6 +706,23 @@ async function loadYearData(year) {
     revealButton.textContent = 'Load Failed';
     revealButton.style.backgroundColor = '#555';
     revealButton.style.cursor = 'default';
+
+    if (diagnosticsChannel) {
+      diagnosticsChannel.log('ui:load-error', {
+        year,
+        message: error && error.message ? error.message : 'Unknown error'
+      });
+    }
+
+    if (diagnosticsConsoleInstance) {
+      diagnosticsConsoleInstance.setStatus(error && error.message ? error.message : 'Load failed.');
+    }
+
+    if (propagateError) {
+      throw error;
+    }
+
+    return { message: error && error.message ? error.message : 'Load failed.' };
   }
 }
 
@@ -703,6 +750,93 @@ window.addEventListener('DOMContentLoaded', () => {
 
   initializeExchangeImport();
   initializeVotingForm();
+
+  diagnosticsChannel = AwardsLoader.createDiagnosticsChannel();
+
+  const diagnosticsPanel = document.getElementById('diagnosticsPanel');
+  if (diagnosticsPanel && typeof AwardsDiagnosticsConsole !== 'undefined') {
+    const clipboardHandler = text => {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        return navigator.clipboard.writeText(text);
+      }
+      throw new Error('Clipboard API is unavailable in this environment.');
+    };
+
+    diagnosticsConsoleInstance = AwardsDiagnosticsConsole.createConsole({
+      container: diagnosticsPanel,
+      channel: diagnosticsChannel,
+      clipboard: clipboardHandler,
+      actions: {
+        reload: () => {
+          const year = yearSelect.value;
+          diagnosticsChannel.log('ui:action', { action: 'reload', year });
+          return loadYearData(year, {
+            statusMessage: `Reloaded ${year} via default loader.`
+          });
+        },
+        'force-fetch': () => {
+          const year = yearSelect.value;
+          diagnosticsChannel.log('ui:action', { action: 'force-fetch', year });
+          if (typeof fetch !== 'function') {
+            throw new Error('Fetch API is not available.');
+          }
+          return loadYearData(year, {
+            loaderOverrides: {
+              fetchImpl: resource => fetch(resource),
+              xhrImpl: () => {
+                throw new Error('XHR disabled during fetch-only diagnostics.');
+              }
+            },
+            statusMessage: `Reloaded ${year} using fetch only.`
+          });
+        },
+        'force-xhr': () => {
+          const year = yearSelect.value;
+          diagnosticsChannel.log('ui:action', { action: 'force-xhr', year });
+          return loadYearData(year, {
+            loaderOverrides: {
+              fetchImpl: async () => {
+                throw new Error('Fetch intentionally disabled for diagnostics.');
+              },
+              xhrImpl: () => new XMLHttpRequest()
+            },
+            statusMessage: `Reloaded ${year} using the XHR fallback.`,
+            propagateError: true
+          });
+        },
+        'simulate-failure': async () => {
+          const year = yearSelect.value;
+          diagnosticsChannel.log('ui:action', { action: 'simulate-failure', year });
+          try {
+            await AwardsLoader.loadAwardsData({
+              year,
+              basePath: 'invalid-path',
+              fetchImpl: async () => ({ ok: false, status: 500 }),
+              xhrImpl: () => ({
+                open() {
+                  throw new Error('XHR disabled for failure simulation.');
+                }
+              }),
+              diagnostics: diagnosticsChannel
+            });
+            return { message: 'Unexpected success while simulating failure—check file paths.' };
+          } catch (error) {
+            return { message: `Failure simulated: ${error.message}` };
+          }
+        },
+        'show-cache': () => {
+          const cachedYears = Array.from(awardsCache.keys());
+          diagnosticsChannel.log('ui:action', { action: 'show-cache', cachedYears });
+          if (!cachedYears.length) {
+            return { message: 'No cached years yet.' };
+          }
+          return { message: `Cached years: ${cachedYears.join(', ')}` };
+        }
+      }
+    });
+
+    diagnosticsChannel.log('ui:init', { message: 'Diagnostics console ready.' });
+  }
 
   yearSelect.addEventListener('change', event => {
     const year = event.target.value;

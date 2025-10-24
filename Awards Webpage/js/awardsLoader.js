@@ -106,26 +106,124 @@
     return JSON.parse(text);
   }
 
-  async function loadViaFetch(resource, fetchFn) {
-    const response = await fetchFn(resource);
-    if (!response || !response.ok) {
-      throw new Error(`Unable to load awards data from ${resource}.`);
+  function createDiagnosticsChannel(listener) {
+    const entries = [];
+
+    function sanitizeDetails(details) {
+      if (!details || typeof details !== 'object') {
+        return {};
+      }
+      return Object.keys(details).reduce((accumulator, key) => {
+        const value = details[key];
+        if (value === undefined) {
+          return accumulator;
+        }
+        if (value instanceof Error) {
+          accumulator[key] = value.message;
+          return accumulator;
+        }
+        if (typeof value === 'object' && value !== null) {
+          try {
+            accumulator[key] = JSON.parse(JSON.stringify(value));
+          } catch (_) {
+            accumulator[key] = String(value);
+          }
+          return accumulator;
+        }
+        accumulator[key] = value;
+        return accumulator;
+      }, {});
     }
-    const raw = await response.json();
-    return normalizeAwardsData(raw);
+
+    const channel = {
+      entries,
+      onEvent: typeof listener === 'function' ? listener : null,
+      log(type, details) {
+        const entry = {
+          timestamp: new Date().toISOString(),
+          type: String(type || 'unknown'),
+          details: sanitizeDetails(details)
+        };
+        entries.push(entry);
+        if (typeof channel.onEvent === 'function') {
+          try {
+            channel.onEvent(entry);
+          } catch (error) {
+            if (typeof console !== 'undefined' && typeof console.error === 'function') {
+              console.error('Diagnostics listener failed:', error);
+            }
+          }
+        }
+        return entry;
+      },
+      clear() {
+        entries.length = 0;
+      },
+      snapshot() {
+        return entries.slice();
+      },
+      toString() {
+        return entries
+          .map(entry => {
+            const detailKeys = Object.keys(entry.details);
+            const serializedDetails = detailKeys.length
+              ? detailKeys
+                  .map(key => `${key}=${JSON.stringify(entry.details[key])}`)
+                  .join(', ')
+              : 'no-details';
+            return `[${entry.timestamp}] ${entry.type} — ${serializedDetails}`;
+          })
+          .join('\n');
+      }
+    };
+
+    return channel;
   }
 
-  function loadViaXhr(resource, xhrFactory) {
+  function resolveDiagnostics(input) {
+    if (!input) {
+      return { log() {} };
+    }
+    if (typeof input.log === 'function') {
+      return input;
+    }
+    if (typeof input === 'function') {
+      return { log: input };
+    }
+    return { log() {} };
+  }
+
+  async function loadViaFetch(resource, fetchFn, diagnostics) {
+    diagnostics.log('fetch:request', { resource });
+    const response = await fetchFn(resource);
+    if (!response || !response.ok) {
+      const error = new Error(`Unable to load awards data from ${resource}.`);
+      diagnostics.log('fetch:error', { resource, status: response && response.status });
+      throw error;
+    }
+    const raw = await response.json();
+    const normalized = normalizeAwardsData(raw);
+    diagnostics.log('fetch:success', {
+      resource,
+      categories: normalized.categories.length
+    });
+    return normalized;
+  }
+
+  function loadViaXhr(resource, xhrFactory, diagnostics) {
+    diagnostics.log('xhr:request', { resource });
     return new Promise((resolve, reject) => {
       let xhr;
       try {
         xhr = xhrFactory();
       } catch (error) {
+        diagnostics.log('xhr:factory-error', { resource, error });
         reject(error);
         return;
       }
 
       if (!xhr) {
+        diagnostics.log('xhr:factory-null', { resource });
         reject(new Error('Unable to create an XMLHttpRequest instance.'));
         return;
       }
@@ -133,6 +231,7 @@
       try {
         xhr.open('GET', resource, true);
       } catch (error) {
+        diagnostics.log('xhr:open-error', { resource, error });
         reject(error);
         return;
       }
@@ -151,24 +250,33 @@
         if ((status >= 200 && status < 300) || (status === 0 && body)) {
           try {
             const raw = parseJsonPayload(body);
-            resolve(normalizeAwardsData(raw));
+            const normalized = normalizeAwardsData(raw);
+            diagnostics.log('xhr:success', {
+              resource,
+              categories: normalized.categories.length
+            });
+            resolve(normalized);
           } catch (error) {
+            diagnostics.log('xhr:parse-error', { resource, error });
             reject(error);
           }
           return;
         }
 
+        diagnostics.log('xhr:http-error', { resource, status });
         reject(new Error(`Unable to load awards data from ${resource}.`));
       };
 
       xhr.onerror = function onerror(event) {
         const error = event instanceof Error ? event : new Error(`Request failed for ${resource}.`);
+        diagnostics.log('xhr:network-error', { resource, error });
         reject(error);
       };
 
       try {
         xhr.send();
       } catch (error) {
+        diagnostics.log('xhr:send-error', { resource, error });
         reject(error);
       }
     });
@@ -181,8 +289,17 @@
       throw new TypeError('A year is required to load awards data.');
     }
 
+    const diagnostics = resolveDiagnostics(options && options.diagnostics);
+    diagnostics.log('load:start', { year, basePath });
+
     const fetchFn = resolveFetchImplementation(options);
     const xhrFactory = resolveXhrFactory(options);
+
+    diagnostics.log('load:strategies', {
+      fetch: Boolean(fetchFn),
+      xhr: Boolean(xhrFactory),
+      fileBypass: shouldBypassFetch(options)
+    });
 
     const candidates = [];
     const pushCandidate = value => {
@@ -202,31 +319,42 @@
     let lastError = null;
     for (const candidate of candidates) {
       const resource = buildResourcePath(candidate, year);
+      diagnostics.log('load:resource', { resource });
       try {
         if (fetchFn) {
-          return await loadViaFetch(resource, fetchFn);
+          const result = await loadViaFetch(resource, fetchFn, diagnostics);
+          diagnostics.log('load:complete', { strategy: 'fetch', resource });
+          return result;
         }
       } catch (error) {
+        diagnostics.log('load:fetch-error', { resource, message: error && error.message });
         lastError = error;
       }
 
       if (xhrFactory) {
         try {
-          return await loadViaXhr(resource, xhrFactory);
+          const result = await loadViaXhr(resource, xhrFactory, diagnostics);
+          diagnostics.log('load:complete', { strategy: 'xhr', resource });
+          return result;
         } catch (error) {
+          diagnostics.log('load:xhr-error', { resource, message: error && error.message });
           lastError = error;
         }
       }
     }
 
     if (lastError) {
+      diagnostics.log('load:failure', { year, message: lastError.message });
       throw lastError;
     }
-    throw new Error(`Unable to load awards data for ${year}.`);
+    const finalError = new Error(`Unable to load awards data for ${year}.`);
+    diagnostics.log('load:failure', { year, message: finalError.message });
+    throw finalError;
   }
 
   return {
     normalizeAwardsData,
-    loadAwardsData
+    loadAwardsData,
+    createDiagnosticsChannel
   };
 });

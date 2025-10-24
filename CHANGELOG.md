@@ -47,3 +47,8 @@
 
 ## 2025-10-24T02:07:20+00:00
 - feat: complete p1 nomination capture – Recorded Chris and Ivy raw submissions in `years/2025/nominations/2025-raw-submissions.md`.
+## 2025-10-24T11:30:00Z
+- feat: add diagnostics telemetry to the awards loader – instrumented `js/awardsLoader.js` with structured logging hooks and exposed a diagnostics channel factory.
+- feat: add on-page diagnostics console – embedded a control panel in `Awards Webpage/index.html` with actionable buttons, styles, and clipboard-friendly output driven by `js/diagnosticsConsole.js` and updated `js/script.js`.
+- test: extend diagnostics coverage – expanded `tests/awards-loader.test.js` and introduced `tests/diagnostics-console.test.js` to cover the new logging paths and console behavior.
+

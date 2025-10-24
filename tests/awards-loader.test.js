@@ -176,3 +176,68 @@ test('loadAwardsData bypasses fetch on file protocol and resolves via XHR fallba
     }
   }
 });
+
+test('createDiagnosticsChannel records entries and formats readable output', () => {
+  const channel = loader.createDiagnosticsChannel();
+  const sampleError = new Error('boom');
+  channel.log('sample:event', { value: 3, nested: { ok: true }, err: sampleError, ignore: undefined });
+
+  assert.equal(channel.entries.length, 1);
+  const entry = channel.entries[0];
+  assert.equal(entry.type, 'sample:event');
+  assert.deepEqual(entry.details, { value: 3, nested: { ok: true }, err: 'boom' });
+
+  const formatted = channel.toString();
+  assert.equal(typeof formatted, 'string');
+  assert.equal(formatted.includes('sample:event'), true);
+  assert.equal(formatted.includes('value=3'), true);
+
+  channel.clear();
+  assert.equal(channel.entries.length, 0);
+});
+
+test('loadAwardsData emits diagnostics for successful fetch resolution', async () => {
+  const channel = loader.createDiagnosticsChannel();
+  const payload = await loader.loadAwardsData({
+    year: '2024',
+    basePath: 'years',
+    fetchImpl: fileFetch,
+    diagnostics: channel
+  });
+
+  assert.equal(payload.year, '2024');
+  const eventTypes = channel.entries.map(entry => entry.type);
+  assert.equal(eventTypes.includes('load:start'), true, 'expected load:start event');
+  assert.equal(eventTypes.includes('fetch:success'), true, 'expected fetch:success event');
+  assert.equal(eventTypes.includes('load:complete'), true, 'expected load:complete event');
+});
+
+test('loadAwardsData logs failures when no strategy succeeds', async () => {
+  const channel = loader.createDiagnosticsChannel();
+
+  await assert.rejects(
+    loader.loadAwardsData({
+      year: '1999',
+      basePath: 'years',
+      fetchImpl: async resource => {
+        return { ok: false, status: 404, resource };
+      },
+      xhrImpl: () => {
+        return {
+          open() {
+            throw new Error('XHR disabled');
+          }
+        };
+      },
+      diagnostics: channel
+    })
+  );
+
+  const types = channel.entries.map(entry => entry.type);
+  assert.equal(types.includes('load:failure'), true, 'expected load:failure event');
+  assert.equal(
+    types.filter(type => type === 'load:resource').length > 0,
+    true,
+    'expected at least one resource attempt'
+  );
+});
