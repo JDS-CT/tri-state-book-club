@@ -85,6 +85,14 @@
         <button type="button" data-diagnostics-action="copy-log">Copy Log</button>
         <button type="button" data-diagnostics-action="clear-log">Clear Log</button>
       </div>
+      <div class="diagnostics-source-bar">
+        <span class="diagnostics-source-label">Source files:</span>
+        <a id="canonicalSourceLink" class="diagnostics-source-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Canonical nominations</a>
+        <a id="rawSubmissionsLink" class="diagnostics-source-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Raw submissions</a>
+        <button type="button" class="diagnostics-refresh" data-diagnostics-action="refresh-canonical" disabled>
+          Refresh from canonical
+        </button>
+      </div>
       <p id="diagnosticsStatus" class="diagnostics-status" data-role="diagnostics-status" aria-live="polite"></p>
       <p class="diagnostics-hint" data-role="diagnostics-copy">Click Copy Log or select the text manually.</p>
       <pre id="diagnosticsOutput" class="code-block diagnostics-output" data-role="diagnostics-output" aria-live="polite">No diagnostics recorded yet.</pre>

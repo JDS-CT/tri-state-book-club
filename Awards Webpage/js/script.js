@@ -18,6 +18,12 @@ let audioSettings = null;
 let settingsInitialized = false;
 let audioCueManager = null;
 
+const diagnosticsSourceElements = {
+  canonicalLink: null,
+  rawLink: null,
+  refreshButton: null
+};
+
 const SettingsModule = typeof AwardsSettings !== 'undefined' ? AwardsSettings : null;
 const AudioModule = typeof CeremonyAudio !== 'undefined' ? CeremonyAudio : null;
 const SOUND_OPTIONS = SettingsModule ? SettingsModule.SOUND_OPTIONS : {
@@ -86,6 +92,120 @@ function rememberAwardsPayload(payload, fallbackYear) {
   if (canonicalYear) {
     const key = String(canonicalYear);
     awardsCache.set(key, payload);
+  }
+}
+
+function getEmbeddedManifestEntry(year) {
+  const key = String(year);
+  if (typeof AwardsEmbeddedData === 'undefined' || !AwardsEmbeddedData) {
+    return null;
+  }
+
+  try {
+    if (typeof AwardsEmbeddedData.get === 'function') {
+      const entry = AwardsEmbeddedData.get(key);
+      if (entry) {
+        return entry;
+      }
+    }
+
+    const manifest = AwardsEmbeddedData.byYear;
+    if (manifest && typeof manifest === 'object') {
+      if (Object.prototype.hasOwnProperty.call(manifest, key)) {
+        return manifest[key];
+      }
+      const numericKey = Number.parseInt(key, 10);
+      if (Number.isFinite(numericKey) && Object.prototype.hasOwnProperty.call(manifest, numericKey)) {
+        return manifest[numericKey];
+      }
+    }
+  } catch (_) {
+    return null;
+  }
+
+  return null;
+}
+
+function buildRelativeHref(base, resourcePath) {
+  const normalizedBase = String(base || '').replace(/^\/+|\/+$/g, '');
+  const normalizedPath = String(resourcePath || '').replace(/^\/+/, '');
+  const segments = [];
+
+  if (normalizedBase) {
+    segments.push(normalizedBase);
+  }
+  if (normalizedPath) {
+    segments.push(normalizedPath);
+  }
+
+  if (!segments.length) {
+    return null;
+  }
+
+  return `../${segments.join('/')}`;
+}
+
+function deriveRawSubmissionsPath(entryPath) {
+  if (typeof entryPath !== 'string') {
+    return null;
+  }
+  if (!/award-nominations\.json$/i.test(entryPath)) {
+    return null;
+  }
+  return entryPath.replace(/award-nominations\.json$/i, 'raw-submissions.md');
+}
+
+function updateSourceControls(year) {
+  const entry = getEmbeddedManifestEntry(year);
+  const canonicalLink = diagnosticsSourceElements.canonicalLink;
+  const rawLink = diagnosticsSourceElements.rawLink;
+  const refreshButton = diagnosticsSourceElements.refreshButton;
+
+  if (!entry) {
+    if (canonicalLink) {
+      canonicalLink.hidden = true;
+    }
+    if (rawLink) {
+      rawLink.hidden = true;
+    }
+    if (refreshButton) {
+      refreshButton.disabled = true;
+      refreshButton.removeAttribute('data-canonical-base');
+      refreshButton.removeAttribute('data-canonical-path');
+      refreshButton.title = 'Canonical data unavailable for this year.';
+    }
+    return;
+  }
+
+  const manifestBase = entry.base || (typeof AwardsEmbeddedData !== 'undefined' && AwardsEmbeddedData.manifestBase) || 'years';
+  const canonicalHref = buildRelativeHref(manifestBase, entry.path || '');
+  const rawHref = buildRelativeHref(manifestBase, deriveRawSubmissionsPath(entry.path));
+
+  if (canonicalLink) {
+    if (canonicalHref) {
+      canonicalLink.href = canonicalHref;
+      canonicalLink.textContent = `${year} canonical nominations`;
+      canonicalLink.hidden = false;
+    } else {
+      canonicalLink.hidden = true;
+    }
+  }
+
+  if (rawLink) {
+    if (rawHref) {
+      rawLink.href = rawHref;
+      rawLink.textContent = `${year} raw submissions`;
+      rawLink.hidden = false;
+    } else {
+      rawLink.hidden = true;
+    }
+  }
+
+  if (refreshButton) {
+    refreshButton.disabled = false;
+    refreshButton.dataset.canonicalBase = manifestBase;
+    refreshButton.dataset.canonicalPath = entry.path || '';
+    refreshButton.title = `Reload ${year} directly from ${manifestBase}/${entry.path || ''}`;
   }
 }
 
@@ -1041,6 +1161,11 @@ window.addEventListener('DOMContentLoaded', () => {
   diagnosticsChannel = AwardsLoader.createDiagnosticsChannel();
 
   const diagnosticsPanel = document.getElementById('diagnosticsPanel');
+  diagnosticsSourceElements.canonicalLink = document.getElementById('canonicalSourceLink');
+  diagnosticsSourceElements.rawLink = document.getElementById('rawSubmissionsLink');
+  diagnosticsSourceElements.refreshButton = diagnosticsPanel
+    ? diagnosticsPanel.querySelector('[data-diagnostics-action="refresh-canonical"]')
+    : document.querySelector('[data-diagnostics-action="refresh-canonical"]');
   if (diagnosticsPanel && typeof AwardsDiagnosticsConsole !== 'undefined') {
     const clipboardHandler = text => {
       if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
@@ -1111,6 +1236,35 @@ window.addEventListener('DOMContentLoaded', () => {
             return { message: `Failure simulated: ${error.message}` };
           }
         },
+        'refresh-canonical': () => {
+          const year = yearSelect.value;
+          diagnosticsChannel.log('ui:action', { action: 'refresh-canonical', year });
+          const refreshButton = diagnosticsSourceElements.refreshButton;
+          if (refreshButton) {
+            refreshButton.disabled = true;
+          }
+
+          const loaderOverrides = { disableEmbedded: true };
+          if (typeof fetch === 'function') {
+            loaderOverrides.fetchImpl = resource => fetch(resource, { cache: 'no-store' });
+          }
+          if (typeof XMLHttpRequest !== 'undefined') {
+            loaderOverrides.xhrImpl = () => new XMLHttpRequest();
+          }
+
+          return loadYearData(year, {
+            loaderOverrides,
+            statusMessage: `Reloaded ${year} from canonical files.`,
+            propagateError: true
+          })
+            .catch(error => {
+              const message = error && error.message ? error.message : 'Unable to refresh from canonical files.';
+              throw new Error(message);
+            })
+            .finally(() => {
+              updateSourceControls(year);
+            });
+        },
         'show-cache': () => {
           const cachedYears = Array.from(awardsCache.keys());
           diagnosticsChannel.log('ui:action', { action: 'show-cache', cachedYears });
@@ -1127,8 +1281,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   yearSelect.addEventListener('change', event => {
     const year = event.target.value;
+    updateSourceControls(year);
     loadYearData(year);
   });
 
+  updateSourceControls(yearSelect.value);
   loadYearData(yearSelect.value);
 });

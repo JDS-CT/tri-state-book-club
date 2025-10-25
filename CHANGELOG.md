@@ -11,6 +11,12 @@
 - feat: complete p1 normalization pass – Populated `years/2025/nominations/2025-award-nominations.json` with merged nominees, aliases, and ranked mentions for all three submitters.
 - feat: complete p2 ballot prep – Added `years/2025/voting/2025-ranked-ballot-options.md` and synchronized `Awards Webpage/js/script_2025.js` to display the consolidated nomination slate for voting setup.
 
+## 2025-10-25T11:57:48Z
+- feat: complete p1 source management controls – Added diagnostics shortcuts in `Awards Webpage/index.html`, `css/styles.css`,
+  and `js/script.js` so editors can open canonical nominations and trigger manual reloads without digging through folders.
+- test: complete p2 canonical refresh coverage – Expanded `tests/awards-loader.test.js` and loader options to verify the new
+  disableEmbedded path ensures fresh data is fetched when the UI requests a manual refresh.
+
 ## 2025-10-25T02:45:00Z
 - feat: synthesize a Four-Dimensional Tombstone winner cue via `Awards Webpage/js/audioCues.js`, exposing a reusable ceremony audio manager.
 - feat: integrate the cue manager with `Awards Webpage/js/script.js`, the ceremony settings UI, and embed the new script in `Awards Webpage/index.html`.
