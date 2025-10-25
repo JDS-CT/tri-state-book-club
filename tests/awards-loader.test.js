@@ -67,58 +67,86 @@ function createFileBackedXhrFactory() {
   };
 }
 
-test('loadAwardsData returns normalized winners for the requested year', async () => {
+test('loadAwardsData resolves canonical nominations for 2025 via manifest lookup', async () => {
+  const diagnostics = loader.createDiagnosticsChannel();
   const payload = await loader.loadAwardsData({
-    year: '2024',
+    year: '2025',
     basePath: 'years',
-    fetchImpl: fileFetch
+    fetchImpl: fileFetch,
+    diagnostics
   });
 
-  assert.equal(payload.year, '2024');
+  assert.equal(payload.year, '2025');
   assert.equal(typeof payload.title, 'string');
   assert.ok(Array.isArray(payload.categories), 'categories should be an array');
   assert.equal(payload.categories.length > 0, true, 'awards should include categories');
-  assert.deepEqual(payload.categories[0], {
-    category: 'Best Book',
-    nominations: [
-      '<i>Mister Magic</i>',
-      '<i>The Three-Body Problem Series</i>',
-      '<i>Intercepts</i>',
-      '<i>The Last Murder at the End of the World</i>'
-    ],
-    winner: '<i>Mister Magic</i>',
-    runnerUp: '<i>The Three-Body Problem Series</i>'
-  });
+
+  const manifestEvents = diagnostics.entries.map(entry => entry.type);
+  assert.equal(
+    manifestEvents.includes('manifest:success'),
+    true,
+    'expected manifest lookup to succeed'
+  );
+
+  const bestBook = payload.categories.find(category => category.category === 'Best Book');
+  assert.ok(bestBook, 'Best Book category should be present');
+  assert.deepEqual(bestBook.nominations, [
+    '<i>The Book of Doors</i>',
+    '<i>Sunrise on the Reaping</i>',
+    '<i>Briardark</i>',
+    '<i>Mickey7</i>'
+  ]);
+  assert.equal(bestBook.winner, '');
+  assert.equal(bestBook.runnerUp, '');
+
+  const bestCharacter = payload.categories.find(category => category.category === 'Best Character');
+  assert.ok(bestCharacter, 'Best Character category should be present');
+  assert.deepEqual(bestCharacter.nominations, [
+    'Cassie Andrews (<i>Book of Doors</i>)',
+    'Haymitch (<i>Sunrise on the Reaping</i>)',
+    'Izzy (<i>The Unmaking of June Farrow</i>)',
+    'Mickey Barnes'
+  ]);
 });
 
-test('loadAwardsData retries with alternate base paths when the default lookup fails', async () => {
+test('loadAwardsData retries manifest lookup paths before resolving canonical data', async () => {
   const attempts = [];
 
   async function fallbackFetch(resource) {
     attempts.push(resource);
     if (resource.startsWith('../years/')) {
-      return { ok: false };
+      return { ok: false, status: 404 };
     }
     if (resource.startsWith('./years/')) {
+      if (resource.endsWith('canonical-nominations.json')) {
+        return { ok: false, status: 404 };
+      }
       return fileFetch(resource.replace(/^\.\//, ''));
     }
-    if (resource.startsWith('years/')) {
+    if (resource === 'years/canonical-nominations.json') {
+      return fileFetch(resource);
+    }
+    if (resource === 'years/2025/nominations/2025-award-nominations.json') {
       return fileFetch(resource);
     }
     throw new Error(`Unexpected resource request: ${resource}`);
   }
 
   const payload = await loader.loadAwardsData({
-    year: '2024',
+    year: '2025',
     fetchImpl: fallbackFetch
   });
 
-  assert.equal(attempts[0], '../years/2024/reveal/awards.json');
+  assert.equal(attempts[0], '../years/canonical-nominations.json');
   assert.ok(
-    attempts.slice(1).some(candidate => candidate.includes('/years/2024/reveal/awards.json')),
-    `Expected a retry using an alternate years directory, saw ${attempts.join(', ')}`
+    attempts.some(candidate => candidate.includes('years/canonical-nominations.json')),
+    `Expected manifest lookup attempts, saw ${attempts.join(', ')}`
   );
-  assert.equal(payload.year, '2024');
+  assert.ok(
+    attempts.includes('years/2025/nominations/2025-award-nominations.json'),
+    `Expected canonical nominations fetch, saw ${attempts.join(', ')}`
+  );
+  assert.equal(payload.year, '2025');
   assert.equal(payload.categories.length > 0, true);
 });
 
@@ -130,13 +158,13 @@ test('loadAwardsData falls back to an XMLHttpRequest implementation when fetch f
   }
 
   const payload = await loader.loadAwardsData({
-    year: '2024',
+    year: '2025',
     fetchImpl: failingFetch,
     xhrImpl: createFileBackedXhrFactory()
   });
 
   assert.equal(attempts > 0, true, 'expected the failing fetch to be invoked');
-  assert.equal(payload.year, '2024');
+  assert.equal(payload.year, '2025');
   assert.equal(payload.categories.length > 0, true);
 });
 
@@ -155,12 +183,12 @@ test('loadAwardsData bypasses fetch on file protocol and resolves via XHR fallba
 
   try {
     const payload = await loader.loadAwardsData({
-      year: '2024',
+      year: '2025',
       xhrImpl: createFileBackedXhrFactory()
     });
 
     assert.equal(fetchCallCount, 0, 'fetch should be bypassed on file:// origins');
-    assert.equal(payload.year, '2024');
+    assert.equal(payload.year, '2025');
     assert.equal(payload.categories.length > 0, true);
   } finally {
     if (typeof originalFetch === 'undefined') {
@@ -199,38 +227,38 @@ test('createDiagnosticsChannel records entries and formats readable output', () 
 test('loadAwardsData emits diagnostics for successful fetch resolution', async () => {
   const channel = loader.createDiagnosticsChannel();
   const payload = await loader.loadAwardsData({
-    year: '2024',
+    year: '2025',
     basePath: 'years',
     fetchImpl: fileFetch,
     diagnostics: channel
   });
 
-  assert.equal(payload.year, '2024');
+  assert.equal(payload.year, '2025');
   const eventTypes = channel.entries.map(entry => entry.type);
   assert.equal(eventTypes.includes('load:start'), true, 'expected load:start event');
-  assert.equal(eventTypes.includes('fetch:success'), true, 'expected fetch:success event');
+  assert.equal(eventTypes.includes('manifest:success'), true, 'expected manifest success event');
   assert.equal(eventTypes.includes('load:complete'), true, 'expected load:complete event');
 });
 
-test('loadAwardsData uses embedded data when network strategies fail', async () => {
+test('loadAwardsData uses embedded manifest metadata when all network strategies fail', async () => {
   const channel = loader.createDiagnosticsChannel();
   const embeddedData = {
-    '2024': {
-      year: '2024',
-      title: 'Embedded fallback awards',
+    '2025': {
+      year: '2025',
+      title: 'Embedded canonical fallback',
       categories: [
         {
           category: 'Embedded Category',
-          nominations: ['Fallback Nominee'],
-          winner: 'Fallback Winner',
-          runnerUp: 'Fallback Runner-up'
+          nominations: ['Embedded Nominee'],
+          winner: '',
+          runnerUp: ''
         }
       ]
     }
   };
 
   const payload = await loader.loadAwardsData({
-    year: '2024',
+    year: '2025',
     fetchImpl: async () => {
       throw new Error('fetch disabled');
     },
@@ -243,13 +271,13 @@ test('loadAwardsData uses embedded data when network strategies fail', async () 
     embeddedData
   });
 
-  assert.equal(payload.year, '2024');
-  assert.equal(payload.title, 'Embedded fallback awards');
+  assert.equal(payload.year, '2025');
+  assert.equal(payload.title, 'Embedded canonical fallback');
   assert.deepEqual(payload.categories[0], {
     category: 'Embedded Category',
-    nominations: ['Fallback Nominee'],
-    winner: 'Fallback Winner',
-    runnerUp: 'Fallback Runner-up'
+    nominations: ['Embedded Nominee'],
+    winner: '',
+    runnerUp: ''
   });
 
   const types = channel.entries.map(entry => entry.type);
