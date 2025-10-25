@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2025-10-25T01:05:00Z
+- feat: restructure diagnostics console into a dedicated tab and aligned layout within `Awards Webpage/index.html` and `css/styles.css`.
+- feat: add configurable ceremony settings with persisted audio selections via `js/settingsManager.js`, updated `js/script.js`, and UI wiring.
+- chore: expand `years/2023/reveal/awards.json` with templated categories and archival data annotations; mirror updates in embedded fallback data.
+- chore: capture partial 2025 awards nominations in `years/2025/reveal/awards.json` and synchronize the embedded fallback catalog.
+- test: cover settings persistence and normalization in `tests/settings-manager.test.js`.
+
+## 2025-10-25T00:10:00Z
+- chore: prune TODO backlog – Removed resolved navigation, loader, and diagnostics items from `TODO.md` in favor of existing changelog entries.
+
+
 ## 2025-10-24T22:06:42Z
 - feat: embed awards fallback catalog – Added `Awards Webpage/js/embeddedAwardsData.js` with deep-frozen 2023-2025 ceremony data so offline diagnostics can recover.
 - fix: load embedded awards data when network strategies fail – Updated `Awards Webpage/js/awardsLoader.js` to consult the embedded catalog and emit detailed diagnostics events.

@@ -1,6 +1,126 @@
 {
   "year": "2023",
   "title": "2023 Tri-State Book Club Awards",
-  "categories": [],
-  "notes": "Nominees and winners will be added after the historical data import."
+  "notes": "Partial reconstruction based on the surviving Joshua ballot. Add archival nominations and final tallies when available.",
+  "categories": [
+    {
+      "category": "Best Book",
+      "nominations": [
+        "<i>Ninth House</i>",
+        "<i>Hell Bent</i>",
+        "<i>Wicked</i>",
+        "<i>Good Omens</i>",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Best Character",
+      "nominations": [
+        "Alex (<i>Ninth House</i>)",
+        "Elphaba (<i>Wicked</i>)",
+        "Darlington (<i>Ninth House</i>)",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Worst Book",
+      "nominations": [
+        "<i>Fairy Tale</i>",
+        "<i>Verity</i>",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Worst Character",
+      "nominations": [
+        "Aton (<i>Hell Bent</i>)",
+        "Flight Killer (<i>Fairy Tale</i>)",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Best Plot Twist",
+      "nominations": [
+        "Self-fulfilling time tear created by the protagonist (<i>Sea of Tranquility</i>)",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Memorable Use of Imagery",
+      "nominations": [
+        "Meta references to internal books with a soft fourth-wall break (<i>Sea of Tranquility</i>)",
+        "Interdimensional transportation via wheel walking (<i>Hell Bent</i>)",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Attractive Character",
+      "nominations": [
+        "Alex Stern (<i>Ninth House</i>)",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Supporting Character",
+      "nominations": [
+        "Darlington (<i>Ninth House</i>)",
+        "Trip (<i>Hell Bent</i>)",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Original Concept",
+      "nominations": [
+        "<i>Nettle and Bone</i>",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Most Anticipated Before Reading",
+      "nominations": [
+        "<i>Hell Bent</i>",
+        "<i>Fairy Tale</i>",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Most Memorable Book Club Moment",
+      "nominations": [
+        "Pennsylvania trip photos",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    },
+    {
+      "category": "Best Book of All Time",
+      "nominations": [
+        "<i>The Library at Mount Char</i>",
+        "<i>The Starless Sea</i>",
+        "<em>Additional nominations pending archival review</em>"
+      ],
+      "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+    }
+  ]
 }

@@ -26,25 +26,10 @@
   <button id="nominations-tab" type="button" class="tab-button" data-view="nominations" role="tab" aria-selected="false" aria-controls="view-nominations">Nominations</button>
   <button id="winners-tab" type="button" class="tab-button" data-view="winners" role="tab" aria-selected="false" aria-controls="view-winners">Winners &amp; Finalists</button>
   <button id="data-tab" type="button" class="tab-button" data-view="data" role="tab" aria-selected="false" aria-controls="view-data">Data Exchange</button>
+  <button id="diagnostics-tab" type="button" class="tab-button" data-view="diagnostics" role="tab" aria-selected="false" aria-controls="view-diagnostics">Diagnostics</button>
   <button id="voting-tab" type="button" class="tab-button" data-view="voting" role="tab" aria-selected="false" aria-controls="view-voting">Ranked Voting</button>
+  <button id="settings-tab" type="button" class="tab-button" data-view="settings" role="tab" aria-selected="false" aria-controls="view-settings">Settings</button>
 </nav>
-
-<section id="diagnosticsPanel" class="diagnostics-panel" aria-live="polite">
-  <h2>Diagnostics Console</h2>
-  <p class="view-subtitle">Run targeted checks and copy the output below when reporting issues.</p>
-  <div class="diagnostics-actions">
-    <button type="button" data-diagnostics-action="reload">Reload Selected Year</button>
-    <button type="button" data-diagnostics-action="force-fetch">Force Fetch Only</button>
-    <button type="button" data-diagnostics-action="force-xhr">Force XHR Fallback</button>
-    <button type="button" data-diagnostics-action="simulate-failure">Simulate Failure</button>
-    <button type="button" data-diagnostics-action="show-cache">Show Cached Years</button>
-    <button type="button" data-diagnostics-action="copy-log">Copy Log</button>
-    <button type="button" data-diagnostics-action="clear-log">Clear Log</button>
-  </div>
-  <p id="diagnosticsStatus" class="diagnostics-status" data-role="diagnostics-status" aria-live="polite"></p>
-  <p class="diagnostics-hint" data-role="diagnostics-copy">Click Copy Log or select the text manually.</p>
-  <pre id="diagnosticsOutput" class="code-block diagnostics-output" data-role="diagnostics-output" aria-live="polite">No diagnostics recorded yet.</pre>
-</section>
 
 <main>
   <section id="view-reveal" class="view view-active" role="tabpanel" aria-labelledby="reveal-tab">
@@ -85,6 +70,27 @@
     </div>
   </section>
 
+  <section id="view-diagnostics" class="view" role="tabpanel" aria-labelledby="diagnostics-tab" hidden>
+    <div class="view-header">
+      <h2>Diagnostics Console</h2>
+      <p class="view-subtitle">Run targeted checks and copy the output below when reporting issues.</p>
+    </div>
+    <div id="diagnosticsPanel" class="panel diagnostics-panel" aria-live="polite">
+      <div class="diagnostics-actions">
+        <button type="button" data-diagnostics-action="reload">Reload Selected Year</button>
+        <button type="button" data-diagnostics-action="force-fetch">Force Fetch Only</button>
+        <button type="button" data-diagnostics-action="force-xhr">Force XHR Fallback</button>
+        <button type="button" data-diagnostics-action="simulate-failure">Simulate Failure</button>
+        <button type="button" data-diagnostics-action="show-cache">Show Cached Years</button>
+        <button type="button" data-diagnostics-action="copy-log">Copy Log</button>
+        <button type="button" data-diagnostics-action="clear-log">Clear Log</button>
+      </div>
+      <p id="diagnosticsStatus" class="diagnostics-status" data-role="diagnostics-status" aria-live="polite"></p>
+      <p class="diagnostics-hint" data-role="diagnostics-copy">Click Copy Log or select the text manually.</p>
+      <pre id="diagnosticsOutput" class="code-block diagnostics-output" data-role="diagnostics-output" aria-live="polite">No diagnostics recorded yet.</pre>
+    </div>
+  </section>
+
   <section id="view-voting" class="view" role="tabpanel" aria-labelledby="voting-tab" hidden>
     <div class="view-header">
       <h2>Ranked Choice Voting Prototype</h2>
@@ -108,6 +114,26 @@
       <pre id="ballotOutput" class="code-block" aria-live="polite">Select a year and fill out the form to generate a ballot.</pre>
     </div>
   </section>
+
+  <section id="view-settings" class="view" role="tabpanel" aria-labelledby="settings-tab" hidden>
+    <div class="view-header">
+      <h2>Ceremony Settings</h2>
+      <p class="view-subtitle">Customize reveal audio cues for this browser.</p>
+    </div>
+    <form id="settingsForm" class="panel settings-form">
+      <div class="settings-field">
+        <label for="revealSoundSelect">Reveal Sound Effect</label>
+        <select id="revealSoundSelect" name="revealSound"></select>
+        <p class="field-description">Played when nominations burst across the screen.</p>
+      </div>
+      <div class="settings-field">
+        <label for="winnerSoundSelect">Winner Sound Effect</label>
+        <select id="winnerSoundSelect" name="winnerSound"></select>
+        <p class="field-description">Played when the winner is announced.</p>
+      </div>
+      <p class="settings-hint">Sound selections are stored locally in this browser.</p>
+    </form>
+  </section>
 </main>
 
 <audio id="explosionSound" src="audio/explosion.mp3"></audio>
@@ -118,6 +144,7 @@
 <script src="js/diagnosticsConsole.js"></script>
 <script src="js/votingFormat.js"></script>
 <script src="js/backgroundWords.js"></script>
+<script src="js/settingsManager.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>

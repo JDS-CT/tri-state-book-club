@@ -152,8 +152,6 @@ main {
   flex-direction: column;
   gap: 1rem;
   text-align: left;
-  width: min(90vw, 900px);
-  margin-bottom: 1.5rem;
   position: relative;
   z-index: 1;
 }
@@ -205,6 +203,32 @@ main {
   overflow-y: auto;
   text-align: left;
   white-space: pre-wrap;
+}
+
+.settings-form {
+  gap: 1.5rem;
+}
+
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.settings-field label {
+  font-weight: 600;
+}
+
+.field-description {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #bbbbbb;
+}
+
+.settings-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #999999;
 }
 
 .view {

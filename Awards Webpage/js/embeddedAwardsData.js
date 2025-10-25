@@ -9,8 +9,128 @@
   "2023": {
     "year": "2023",
     "title": "2023 Tri-State Book Club Awards",
-    "categories": [],
-    "notes": "Nominees and winners will be added after the historical data import."
+    "notes": "Partial reconstruction based on the surviving Joshua ballot. Add archival nominations and final tallies when available.",
+    "categories": [
+      {
+        "category": "Best Book",
+        "nominations": [
+          "<i>Ninth House</i>",
+          "<i>Hell Bent</i>",
+          "<i>Wicked</i>",
+          "<i>Good Omens</i>",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Best Character",
+        "nominations": [
+          "Alex (<i>Ninth House</i>)",
+          "Elphaba (<i>Wicked</i>)",
+          "Darlington (<i>Ninth House</i>)",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Worst Book",
+        "nominations": [
+          "<i>Fairy Tale</i>",
+          "<i>Verity</i>",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Worst Character",
+        "nominations": [
+          "Aton (<i>Hell Bent</i>)",
+          "Flight Killer (<i>Fairy Tale</i>)",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Best Plot Twist",
+        "nominations": [
+          "Self-fulfilling time tear created by the protagonist (<i>Sea of Tranquility</i>)",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Memorable Use of Imagery",
+        "nominations": [
+          "Meta references to internal books with a soft fourth-wall break (<i>Sea of Tranquility</i>)",
+          "Interdimensional transportation via wheel walking (<i>Hell Bent</i>)",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Attractive Character",
+        "nominations": [
+          "Alex Stern (<i>Ninth House</i>)",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Supporting Character",
+        "nominations": [
+          "Darlington (<i>Ninth House</i>)",
+          "Trip (<i>Hell Bent</i>)",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Original Concept",
+        "nominations": [
+          "<i>Nettle and Bone</i>",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Most Anticipated Before Reading",
+        "nominations": [
+          "<i>Hell Bent</i>",
+          "<i>Fairy Tale</i>",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Most Memorable Book Club Moment",
+        "nominations": [
+          "Pennsylvania trip photos",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      },
+      {
+        "category": "Best Book of All Time",
+        "nominations": [
+          "<i>The Library at Mount Char</i>",
+          "<i>The Starless Sea</i>",
+          "<em>Additional nominations pending archival review</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
+      }
+    ]
   },
   "2024": {
     "year": "2024",
@@ -161,8 +281,142 @@
   "2025": {
     "year": "2025",
     "title": "2025 Tri-State Book Club Awards",
-    "categories": [],
-    "notes": "Populate after tallying the 2025 results."
+    "notes": "Draft compiled from Chris and Ivy nomination forms (2 of 3 submissions received). Update once the final ballot arrives and tallies are complete.",
+    "categories": [
+      {
+        "category": "Best Book",
+        "nominations": [
+          "<i>The Book of Doors</i>",
+          "<i>Sunrise on the Reaping</i>",
+          "<i>Briardark</i>",
+          "<em>Awaiting final ballot for additional titles</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Best Character",
+        "nominations": [
+          "Cassie Andrews (<i>The Book of Doors</i>)",
+          "Haymitch (<i>Sunrise on the Reaping</i>)",
+          "Izzy (<i>Sunrise on the Reaping</i>)",
+          "Drummond Fox (<i>Briardark</i>)",
+          "<em>Awaiting final ballot for additional characters</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Worst Book",
+        "nominations": [
+          "<i>Pines</i>",
+          "<i>Mickey7</i>",
+          "<i>Witchstone</i>",
+          "<em>Awaiting final ballot for additional titles</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Worst Character",
+        "nominations": [
+          "Ethan Burke (<i>Pines</i>)",
+          "Adorane (<i>The Threat Below</i>)",
+          "The Woman (<i>The Book of Doors</i>)",
+          "<em>Awaiting final ballot for additional characters</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Best Plot Twist",
+        "nominations": [
+          "Cassie bridges the objects and books worlds (<i>The Society of Unknowable Objects</i>)",
+          "The old man never used the travel book (<i>The Society of Unknowable Objects</i>)",
+          "<em>Awaiting final ballot for additional twists</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Memorable Use of Imagery",
+        "nominations": [
+          "The living books channeling light, shadow, and illusions (<i>The Book of Doors</i>)",
+          "Cassie getting stuck in the past (<i>The Society of Unknowable Objects</i>)",
+          "<em>Awaiting final ballot for additional imagery</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Attractive Character",
+        "nominations": [
+          "James (<i>The Society of Unknowable Objects</i>)",
+          "Toto (<i>TOTO</i>)",
+          "Izzy (<i>Sunrise on the Reaping</i>)",
+          "<em>Awaiting final ballot for additional characters</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Supporting Character",
+        "nominations": [
+          "The Woman (<i>The Book of Doors</i>)",
+          "Eveshone (<i>The Threat Below</i>)",
+          "Min (<i>Sunrise on the Reaping</i>)",
+          "The young tribute whose father aided Haymitch (<i>Sunrise on the Reaping</i>)",
+          "<em>Awaiting final ballot for additional characters</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Original Concept",
+        "nominations": [
+          "<i>The Book of Doors</i>",
+          "<i>Dreadful</i>",
+          "<i>Witchstone</i>",
+          "<i>Briardark</i>",
+          "<em>Awaiting final ballot for additional titles</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Most Anticipated Before Reading",
+        "nominations": [
+          "<i>Sunrise on the Reaping</i>",
+          "<i>TOTO</i>",
+          "<i>Briardark</i>",
+          "<i>Dreadful</i>",
+          "<em>Awaiting final ballot for additional titles</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Most Memorable Book Club Moment",
+        "nominations": [
+          "Pitch to adopt an AI note-taker for 2026",
+          "Karaoke night energy",
+          "The ghost who needed daily greetings on the typewriter",
+          "<em>Awaiting final ballot for additional moments</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      },
+      {
+        "category": "Best Book of All Time",
+        "nominations": [
+          "<i>Abhorsen</i>",
+          "<i>The Starless Sea</i>",
+          "<em>Awaiting final ballot for additional titles</em>"
+        ],
+        "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
+        "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      }
+    ]
   }
 };
 
