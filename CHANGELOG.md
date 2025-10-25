@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2025-10-27T14:30:00Z
+- fix: align Min's supporting character entry with the "Rook" title in `years/2025/nominations/2025-award-nominations.json` and regenerate the embedded snapshot for the ceremony site.
+- chore: update `years/2025/voting/2025-ranked-ballot-options.md` so the ranked ballot reference lists Min (the Rook).
+- test: extend `tests/awards-loader.test.js` to guard the Min (the Rook) nomination output.
+
 ## 2025-10-27T03:15:00Z
 - fix: unblock the awards loader offline regression by generating canonical snapshots via `scripts/generate-embedded-awards-data.js` and refreshing `Awards Webpage/js/embeddedAwardsData.js`.
 - fix: allow `Awards Webpage/js/awardsLoader.js` to hydrate embedded snapshots directly when fetch/XHR are unavailable, improving diagnostics coverage.

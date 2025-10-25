@@ -372,7 +372,7 @@
           "nominations": [
             "The Woman (<i>Book of Doors</i>)",
             "Eveshone (<i>The Threat Below</i>)",
-            "min",
+            "Min (<i>the Rook</i>)",
             "Maysilee Donner (<i>Sunrise on the Reaping</i>)",
             "Berto Gomez (<i>Mickey 7</i>)"
           ],
