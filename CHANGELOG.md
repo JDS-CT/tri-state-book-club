@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2025-10-27T03:15:00Z
+- fix: unblock the awards loader offline regression by generating canonical snapshots via `scripts/generate-embedded-awards-data.js` and refreshing `Awards Webpage/js/embeddedAwardsData.js`.
+- fix: allow `Awards Webpage/js/awardsLoader.js` to hydrate embedded snapshots directly when fetch/XHR are unavailable, improving diagnostics coverage.
+- test: extend `tests/awards-loader.test.js` with embedded snapshot parity checks and fallback coverage for 2025 canonical data.
+- docs: note the regeneration and troubleshooting workflow in `years/2025/README.md` so editors can verify the loader pipeline.
+
 ## 2025-10-26T18:15:00Z
 - feat: complete p1 nomination intake – Logged Sylvia's final responses in `years/2025/nominations/2025-raw-submissions.md` alongside Chris and Ivy.
 - feat: complete p1 normalization pass – Populated `years/2025/nominations/2025-award-nominations.json` with merged nominees, aliases, and ranked mentions for all three submitters.

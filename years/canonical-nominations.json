@@ -1,0 +1,17 @@
+{
+  "2023": {
+    "path": "2023/nominations/joshua-2023-ballot.json",
+    "format": "ballot",
+    "title": "2023 Tri-State Book Club Awards — Joshua ballot reconstruction"
+  },
+  "2024": {
+    "path": "2024/nominations/2024-award-nominations.json",
+    "format": "category-counts",
+    "title": "2024 Tri-State Book Club Awards Nominations"
+  },
+  "2025": {
+    "path": "2025/nominations/2025-award-nominations.json",
+    "format": "normalized-nominations",
+    "title": "2025 Tri-State Book Club Awards Nominations"
+  }
+}
