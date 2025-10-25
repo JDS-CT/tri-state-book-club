@@ -16,8 +16,10 @@ let diagnosticsConsoleInstance = null;
 let settingsController = null;
 let audioSettings = null;
 let settingsInitialized = false;
+let audioCueManager = null;
 
 const SettingsModule = typeof AwardsSettings !== 'undefined' ? AwardsSettings : null;
+const AudioModule = typeof CeremonyAudio !== 'undefined' ? CeremonyAudio : null;
 const SOUND_OPTIONS = SettingsModule ? SettingsModule.SOUND_OPTIONS : {
   revealSound: [
     { id: 'explosion', label: 'Classic Explosion', src: 'audio/explosion.mp3' },
@@ -25,7 +27,8 @@ const SOUND_OPTIONS = SettingsModule ? SettingsModule.SOUND_OPTIONS : {
   ],
   winnerSound: [
     { id: 'winner_fanfare', label: 'Triumphant Fanfare', src: 'audio/winner_fanfare.mp3' },
-    { id: 'three_thirty_four', label: 'Three Thirty Four Theme', src: 'audio/threeThirtyFour.mp3' }
+    { id: 'three_thirty_four', label: 'Three Thirty Four Theme', src: 'audio/threeThirtyFour.mp3' },
+    { id: 'tombstone_theme', label: 'Four-Dimensional Tombstone Elegy (Synth)', src: null }
   ]
 };
 const SETTINGS_STORAGE_KEY = SettingsModule && SettingsModule.STORAGE_KEY
@@ -226,32 +229,65 @@ function resolveSoundOption(key, value) {
   return match || options[0];
 }
 
+function ensureAudioCueManager() {
+  if (audioCueManager) {
+    return audioCueManager;
+  }
+  if (!AudioModule || typeof AudioModule.createAudioCueManager !== 'function') {
+    return null;
+  }
+  const channels = AudioModule.DEFAULT_CHANNELS || {};
+  audioCueManager = AudioModule.createAudioCueManager({
+    channels,
+    getElementById: id => document.getElementById(id)
+  });
+  return audioCueManager;
+}
+
 function applyAudioSettingsToUi(settings) {
-  const revealAudio = document.getElementById('explosionSound');
-  const winnerAudio = document.getElementById('winnerSound');
   const revealOption = resolveSoundOption('revealSound', settings.revealSound);
   const winnerOption = resolveSoundOption('winnerSound', settings.winnerSound);
 
-  if (revealAudio && revealOption) {
-    const currentSrc = revealAudio.getAttribute('src');
-    if (currentSrc !== revealOption.src) {
-      revealAudio.setAttribute('src', revealOption.src);
-      revealAudio.pause();
-      revealAudio.currentTime = 0;
-      if (typeof revealAudio.load === 'function') {
-        revealAudio.load();
+  const manager = ensureAudioCueManager();
+  if (manager) {
+    if (revealOption) {
+      manager.select('revealSound', revealOption.id);
+    }
+    if (winnerOption) {
+      manager.select('winnerSound', winnerOption.id);
+    }
+  } else {
+    const revealAudio = document.getElementById('explosionSound');
+    if (revealAudio && revealOption && revealOption.src) {
+      const currentSrc = revealAudio.getAttribute('src');
+      if (currentSrc !== revealOption.src) {
+        revealAudio.setAttribute('src', revealOption.src);
+        if (typeof revealAudio.pause === 'function') {
+          revealAudio.pause();
+        }
+        if ('currentTime' in revealAudio) {
+          revealAudio.currentTime = 0;
+        }
+        if (typeof revealAudio.load === 'function') {
+          revealAudio.load();
+        }
       }
     }
-  }
 
-  if (winnerAudio && winnerOption) {
-    const currentSrc = winnerAudio.getAttribute('src');
-    if (currentSrc !== winnerOption.src) {
-      winnerAudio.setAttribute('src', winnerOption.src);
-      winnerAudio.pause();
-      winnerAudio.currentTime = 0;
-      if (typeof winnerAudio.load === 'function') {
-        winnerAudio.load();
+    const winnerAudio = document.getElementById('winnerSound');
+    if (winnerAudio && winnerOption && winnerOption.src) {
+      const currentSrc = winnerAudio.getAttribute('src');
+      if (currentSrc !== winnerOption.src) {
+        winnerAudio.setAttribute('src', winnerOption.src);
+        if (typeof winnerAudio.pause === 'function') {
+          winnerAudio.pause();
+        }
+        if ('currentTime' in winnerAudio) {
+          winnerAudio.currentTime = 0;
+        }
+        if (typeof winnerAudio.load === 'function') {
+          winnerAudio.load();
+        }
       }
     }
   }
@@ -264,6 +300,34 @@ function applyAudioSettingsToUi(settings) {
   const winnerSelect = document.getElementById('winnerSoundSelect');
   if (winnerSelect && winnerOption) {
     winnerSelect.value = winnerOption.id;
+  }
+}
+
+function playAudioCue(channel, fallbackElementId) {
+  const manager = ensureAudioCueManager();
+  if (manager) {
+    manager.play(channel).catch(() => {});
+    return;
+  }
+
+  if (!fallbackElementId) {
+    return;
+  }
+  const element = document.getElementById(fallbackElementId);
+  if (!element || typeof element.play !== 'function') {
+    return;
+  }
+  if ('currentTime' in element) {
+    try {
+      element.currentTime = 0;
+    } catch (error) {
+      element.currentTime = 0;
+    }
+  }
+  try {
+    element.play();
+  } catch (error) {
+    // Ignore playback rejections in fallback mode.
   }
 }
 
@@ -805,11 +869,7 @@ function revealNext() {
     const totalNominationDisplayTime = (shuffledNominations.length - 1) * 100 + 500;
 
     setTimeout(() => {
-      const explosionSound = document.getElementById('explosionSound');
-      if (explosionSound) {
-        explosionSound.currentTime = 0;
-        explosionSound.play().catch(() => {});
-      }
+      playAudioCue('revealSound', 'explosionSound');
 
       nominationDivs.forEach(nomDiv => {
         nomDiv.classList.add('explode');
@@ -821,11 +881,7 @@ function revealNext() {
       winnerDiv.id = 'winner';
       contentDiv.appendChild(winnerDiv);
 
-      const winnerSound = document.getElementById('winnerSound');
-      if (winnerSound) {
-        winnerSound.currentTime = 0;
-        winnerSound.play().catch(() => {});
-      }
+      playAudioCue('winnerSound', 'winnerSound');
 
       let flickerCount = 0;
       const maxFlickers = 50;

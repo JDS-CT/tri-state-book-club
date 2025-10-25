@@ -66,3 +66,12 @@ test('createController persists sanitized settings', () => {
     'controller.load should return the sanitized settings from storage'
   );
 });
+
+test('winner sound list exposes the Four-Dimensional Tombstone synth theme', () => {
+  const ids = AwardsSettings.SOUND_OPTIONS.winnerSound.map(option => option.id);
+
+  assert.ok(
+    ids.includes('tombstone_theme'),
+    'winner sound options should include the Four-Dimensional Tombstone synth entry'
+  );
+});

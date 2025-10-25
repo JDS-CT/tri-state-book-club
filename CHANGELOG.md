@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2025-10-25T02:45:00Z
+- feat: synthesize a Four-Dimensional Tombstone winner cue via `Awards Webpage/js/audioCues.js`, exposing a reusable ceremony audio manager.
+- feat: integrate the cue manager with `Awards Webpage/js/script.js`, the ceremony settings UI, and embed the new script in `Awards Webpage/index.html`.
+- test: add audio cue manager regression coverage and ensure the Tombstone option surfaces in `tests/settings-manager.test.js`.
+
 ## 2025-10-25T01:05:00Z
 - feat: restructure diagnostics console into a dedicated tab and aligned layout within `Awards Webpage/index.html` and `css/styles.css`.
 - feat: add configurable ceremony settings with persisted audio selections via `js/settingsManager.js`, updated `js/script.js`, and UI wiring.
