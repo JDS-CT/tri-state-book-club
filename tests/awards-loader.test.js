@@ -108,6 +108,13 @@ test('loadAwardsData resolves canonical nominations for 2025 via manifest lookup
     'Izzy (<i>The Unmaking of June Farrow</i>)',
     'Mickey Barnes'
   ]);
+
+  const supportingCharacter = payload.categories.find(category => category.category === 'Supporting Character');
+  assert.ok(supportingCharacter, 'Supporting Character category should be present');
+  assert.ok(
+    supportingCharacter.nominations.includes('Min (<i>the Rook</i>)'),
+    'Min (the Rook) should be highlighted in Supporting Character nominations'
+  );
 });
 
 test('loadAwardsData retries manifest lookup paths before resolving canonical data', async () => {

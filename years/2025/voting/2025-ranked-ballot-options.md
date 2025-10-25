@@ -50,7 +50,7 @@ This reference consolidates every nomination submitted by Chris, Ivy, and Sylvia
 - Berto Gomez
 - Eveshone (The Threat Below)
 - Maysilee Donner
-- Min
+- Min (the Rook)
 - The Woman (The Book of Doors)
 
 ## Original Concept

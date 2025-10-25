@@ -370,10 +370,14 @@
         },
         {
           "id": "min",
-          "display_name": "Min",
+          "display_name": "Min (the Rook)",
+          "aliases": [
+            "Min"
+          ],
           "mentions": [
             { "submitter": "Ivy", "rank": 1, "raw_text": "min" }
-          ]
+          ],
+          "notes": "Clarified the character's role as the Rook to match the memory aid."
         },
         {
           "id": "maysilee-donner",
