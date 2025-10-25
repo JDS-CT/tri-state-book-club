@@ -1,85 +1,623 @@
 {
   "season": 2025,
-  "generated_at": "2025-10-15T22:14:00Z",
+  "generated_at": "2025-10-26T18:00:00Z",
   "source_form": "2025-ms-forms-nominations",
   "categories": [
     {
       "id": "best-book",
       "label": "Best Book",
       "prompt": "Best Book",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "the-book-of-doors",
+          "display_name": "The Book of Doors",
+          "aliases": [
+            "Book of Doors",
+            "Book of Door",
+            "~book of doors"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "The Book of Doors" },
+            { "submitter": "Ivy", "rank": 1, "raw_text": "~book of doors" },
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "Book of Door" }
+          ],
+          "notes": "Normalized to the published title."
+        },
+        {
+          "id": "sunrise-on-the-reaping",
+          "display_name": "Sunrise on the Reaping",
+          "aliases": [
+            "Sunrise in the Reaping"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Sunrise on the Reaping" },
+            { "submitter": "Ivy", "rank": 2, "raw_text": "sunrise on the reaping" }
+          ]
+        },
+        {
+          "id": "briardark",
+          "display_name": "Briardark",
+          "mentions": [
+            { "submitter": "Chris", "rank": 3, "raw_text": "Briardark" }
+          ]
+        },
+        {
+          "id": "mickey-7",
+          "display_name": "Mickey7",
+          "aliases": [
+            "Mickey 7"
+          ],
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Mickey 7" }
+          ]
+        }
+      ]
     },
     {
       "id": "best-character",
       "label": "Best Character",
       "prompt": "Best Character",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "cassie-andrews",
+          "display_name": "Cassie Andrews",
+          "aliases": [
+            "Cassie Andrews – Book of Doors"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "Cassie Andrews – Book of Doors" }
+          ]
+        },
+        {
+          "id": "haymitch-abernathy",
+          "display_name": "Haymitch Abernathy",
+          "aliases": [
+            "Haymitch",
+            "Haymitch – Sunrise on the Reaping"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Haymitch – Sunrise on the Reaping" },
+            { "submitter": "Ivy", "rank": 2, "raw_text": "haymitch" },
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "Haymitch Abernathy" }
+          ]
+        },
+        {
+          "id": "izzy-the-unmaking-of-june-farrow",
+          "display_name": "Izzy (The Unmaking of June Farrow)",
+          "aliases": [
+            "iZZY",
+            "izzy"
+          ],
+          "mentions": [
+            { "submitter": "Ivy", "rank": 1, "raw_text": "iZZY" }
+          ],
+          "notes": "Clarified the source book for the nomination."
+        },
+        {
+          "id": "mickey-barnes",
+          "display_name": "Mickey Barnes",
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Mickey Barnes" }
+          ]
+        }
+      ]
     },
     {
       "id": "worst-book",
       "label": "Worst Book",
       "prompt": "Worst Book",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "pines",
+          "display_name": "Pines",
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "Pines" },
+            { "submitter": "Ivy", "rank": 1, "raw_text": "pines" },
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Pines" }
+          ]
+        },
+        {
+          "id": "mickey-7-worst-book",
+          "display_name": "Mickey7",
+          "aliases": [
+            "Mickey 7"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Mickey 7" }
+          ],
+          "notes": "Separate slug from Best Book nomination to avoid ambiguity in downstream tooling."
+        },
+        {
+          "id": "the-witchstone",
+          "display_name": "The Witchstone",
+          "aliases": [
+            "Witchstone"
+          ],
+          "mentions": [
+            { "submitter": "Ivy", "rank": 2, "raw_text": "Witchstone" }
+          ]
+        },
+        {
+          "id": "toto",
+          "display_name": "TOTO",
+          "aliases": [
+            "Toto"
+          ],
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "Toto" }
+          ]
+        }
+      ]
     },
     {
       "id": "worst-character",
       "label": "Worst Character",
       "prompt": "Worst Character",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "ethan-burke",
+          "display_name": "Ethan Burke",
+          "aliases": [
+            "Ethan Burke - Pines"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "Ethan Burke - Pines" },
+            { "submitter": "Ivy", "rank": 2, "raw_text": "ethan burke" }
+          ]
+        },
+        {
+          "id": "adorane-the-threat-below",
+          "display_name": "Adorane (The Threat Below)",
+          "aliases": [
+            "Adorane – The Threat Below"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Adorane – The Threat Below" }
+          ]
+        },
+        {
+          "id": "the-woman-book-of-doors",
+          "display_name": "The Woman (The Book of Doors)",
+          "aliases": [
+            "the woman"
+          ],
+          "mentions": [
+            { "submitter": "Ivy", "rank": 1, "raw_text": "the woman" }
+          ]
+        },
+        {
+          "id": "emmit-briardark",
+          "display_name": "Emmit (Briardark)",
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "Emmit (Briardark)" }
+          ]
+        },
+        {
+          "id": "icelyn-the-threat-below",
+          "display_name": "Icelyn (The Threat Below)",
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Icelyn (The Threat Below)" }
+          ]
+        }
+      ]
     },
     {
       "id": "best-plot-twist",
       "label": "Best Plot Twist",
       "prompt": "Best Plot Twist",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "cassie-connects-the-worlds",
+          "display_name": "Cassie links the Society of Unknowable Objects to the Book of Doors",
+          "aliases": [
+            "The Society of Unknowable Objects – Having Cassie Andrews connect the two worlds: objects and books.",
+            "when cassie comes into bookstore in society of unknowable"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "The Society of Unknowable Objects – Having Cassie Andrews connect the two worlds: objects and books." },
+            { "submitter": "Ivy", "rank": 1, "raw_text": "when cassie comes into bookstore in society of unknowable" }
+          ],
+          "notes": "Merged similar descriptions of Cassie's reveal."
+        },
+        {
+          "id": "old-man-never-used-the-book",
+          "display_name": "The old man never used the book to travel",
+          "mentions": [
+            { "submitter": "Ivy", "rank": 2, "raw_text": "that the old man never used the book to travel" }
+          ]
+        },
+        {
+          "id": "annie-is-the-family-friend",
+          "display_name": "Annie is the family friend from June's granny",
+          "aliases": [
+            "When we find out that June’s daughter Annie was the family friend her granny grew up with"
+          ],
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "When we find out that June’s daughter Annie was the family friend her granny grew up with" }
+          ],
+          "notes": "Plot twist from The Unmaking of June Farrow."
+        },
+        {
+          "id": "the-woman-corrupted-by-hugo-barbery",
+          "display_name": "The Woman is corrupted by Hugo Barbery",
+          "aliases": [
+            "when we find out “The Woman” is full of malice and evil after a piece of Hugo Barbery corrupted her as a child in the city"
+          ],
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "when we find out “The Woman” is full of malice and evil after a piece of Hugo Barbery corrupted her as a child in the city" }
+          ]
+        }
+      ]
     },
     {
       "id": "memorable-use-of-imagery",
       "label": "Memorable Use of Imagery",
       "prompt": "Memorable Use of Imagery",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "the-book-of-doors-imagery",
+          "display_name": "The Book of Doors — Living tomes and time slips",
+          "aliases": [
+            "The Book of Doors – as their powers were used; the book of illusions, book of doors – opening portals to other places, book of light – blinding; book of shadows – to hide away; book of despair – the woman",
+            "cassie getting stuck in the past"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "The Book of Doors – as their powers were used; the book of illusions, book of doors – opening portals to other places, book of light – blinding; book of shadows – to hide away; book of despair – the woman" },
+            { "submitter": "Ivy", "rank": 1, "raw_text": "cassie getting stuck in the past" }
+          ],
+          "notes": "Grouped imagery moments from The Book of Doors."
+        },
+        {
+          "id": "the-unmaking-of-june-farrow-imagery",
+          "display_name": "The Unmaking of June Farrow — Vivid but unspecified scene",
+          "aliases": [
+            "there was something to do with the June Farrow book that I can’t remember now 🤣"
+          ],
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "there was something to do with the June Farrow book that I can’t remember now 🤣" }
+          ],
+          "notes": "Captures Sylvia's note about a memorable yet unnamed scene."
+        },
+        {
+          "id": "threat-below-forest-hunt",
+          "display_name": "Running from the Threat Below in the forest",
+          "aliases": [
+            "Running/Hiding in the forest from the Threat Belows, their two-toned howls, fast speed, tall strong humanoids with talons"
+          ],
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Running/Hiding in the forest from the Threat Belows, their two-toned howls, fast speed, tall strong humanoids with talons" }
+          ]
+        }
+      ]
     },
     {
       "id": "attractive-character",
       "label": "Attractive Character",
       "prompt": "Attractive Character",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "james-the-society-of-unknowable-objects",
+          "display_name": "James (The Society of Unknowable Objects)",
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "James – The Society of Unknowable Objects" }
+          ]
+        },
+        {
+          "id": "toto-attractive",
+          "display_name": "Toto (TOTO)",
+          "aliases": [
+            "Toto (woof!) – TOTO"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Toto (woof!) – TOTO" }
+          ]
+        },
+        {
+          "id": "drummond-fox",
+          "display_name": "Drummond Fox",
+          "aliases": [
+            "drummand fox"
+          ],
+          "mentions": [
+            { "submitter": "Ivy", "rank": 1, "raw_text": "drummand fox" }
+          ]
+        },
+        {
+          "id": "izzy-attractive",
+          "display_name": "Izzy (The Unmaking of June Farrow)",
+          "aliases": [
+            "izzy"
+          ],
+          "mentions": [
+            { "submitter": "Ivy", "rank": 2, "raw_text": "izzy" }
+          ]
+        },
+        {
+          "id": "eamon-stone",
+          "display_name": "Eamon Stone (The Unmaking of June Farrow)",
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "Eamon Stone (The Unmaking of June Farrow)" }
+          ]
+        },
+        {
+          "id": "adorane-attractive",
+          "display_name": "Adorane (The Threat Below)",
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Adorane (The Threat Below)" }
+          ]
+        }
+      ]
     },
     {
       "id": "supporting-character",
       "label": "Supporting Character",
       "prompt": "Supporting Character",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "the-woman-supporting",
+          "display_name": "The Woman (The Book of Doors)",
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "The Woman – Book of Doors" }
+          ],
+          "notes": "Appears in multiple categories; kept same display name for clarity."
+        },
+        {
+          "id": "eveshone-the-threat-below",
+          "display_name": "Eveshone (The Threat Below)",
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Eveshone – The Threat Below" }
+          ]
+        },
+        {
+          "id": "min",
+          "display_name": "Min",
+          "mentions": [
+            { "submitter": "Ivy", "rank": 1, "raw_text": "min" }
+          ]
+        },
+        {
+          "id": "maysilee-donner",
+          "display_name": "Maysilee Donner",
+          "aliases": [
+            "the young tribute from sunrise on the reaping who's dad helped haymitch"
+          ],
+          "mentions": [
+            { "submitter": "Ivy", "rank": 2, "raw_text": "the young tribute from sunrise on the reaping who's dad helped haymitch" },
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "Maysilee Donner (Sunrise on the Reaping)" }
+          ]
+        },
+        {
+          "id": "berto-gomez",
+          "display_name": "Berto Gomez",
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Berto Gomez (Mickey 7)" }
+          ]
+        }
+      ]
     },
     {
       "id": "original-concept",
       "label": "Original Concept",
       "prompt": "Original Concept",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "the-book-of-doors-original",
+          "display_name": "The Book of Doors",
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "The Book of Doors" }
+          ]
+        },
+        {
+          "id": "dreadful",
+          "display_name": "Dreadful",
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Dreadful" }
+          ]
+        },
+        {
+          "id": "the-witchstone-original",
+          "display_name": "The Witchstone",
+          "aliases": [
+            "witchstone"
+          ],
+          "mentions": [
+            { "submitter": "Ivy", "rank": 1, "raw_text": "witchstone" },
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "The Witchstone" }
+          ]
+        },
+        {
+          "id": "briardark-original",
+          "display_name": "Briardark",
+          "mentions": [
+            { "submitter": "Ivy", "rank": 2, "raw_text": "briardark" }
+          ]
+        },
+        {
+          "id": "the-threat-below-original",
+          "display_name": "The Threat Below",
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "The Threat Below" }
+          ]
+        }
+      ]
     },
     {
       "id": "most-anticipated-before-reading",
       "label": "Most Anticipated Before Reading",
       "prompt": "Most Anticipated Before Reading",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "sunrise-on-the-reaping-anticipated",
+          "display_name": "Sunrise on the Reaping",
+          "aliases": [
+            "Sunrise in the Reaping"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "Sunrise on the Reaping" },
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "Sunrise in the Reaping" }
+          ]
+        },
+        {
+          "id": "toto-anticipated",
+          "display_name": "TOTO",
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "TOTO" }
+          ]
+        },
+        {
+          "id": "briardark-anticipated",
+          "display_name": "Briardark",
+          "mentions": [
+            { "submitter": "Ivy", "rank": 1, "raw_text": "briardark" },
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Briardark" }
+          ]
+        },
+        {
+          "id": "dreadful-anticipated",
+          "display_name": "Dreadful",
+          "mentions": [
+            { "submitter": "Ivy", "rank": 2, "raw_text": "dreadful" }
+          ]
+        }
+      ]
     },
     {
       "id": "most-memorable-book-club-moment",
       "label": "Most Memorable Book Club Moment",
       "prompt": "Most Memorable Book Club Moment",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "ai-notetaker-pitch",
+          "display_name": "Pitching an AI notetaker using the awards format",
+          "aliases": [
+            "When Chris suggested we use an AI notetaker next year, using the book club awards as his format to present this idea because this question comes every year and what if we had the notes + our talking points – bet."
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "When Chris suggested we use an AI notetaker next year, using the book club awards as his format to present this idea because this question comes every year and what if we had the notes + our talking points – bet." }
+          ]
+        },
+        {
+          "id": "karaoke-night",
+          "display_name": "Karaoke night",
+          "aliases": [
+            "Karaoke – hands down – energy the vibe, it was all great!",
+            "karaoke"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Karaoke – hands down – energy the vibe, it was all great!" },
+            { "submitter": "Ivy", "rank": 2, "raw_text": "karaoke" }
+          ]
+        },
+        {
+          "id": "greeting-the-ghost",
+          "display_name": "Greeting the house ghost each day",
+          "aliases": [
+            "the ghost in the house who needed greeted daily on the typewriter"
+          ],
+          "mentions": [
+            { "submitter": "Ivy", "rank": 1, "raw_text": "the ghost in the house who needed greeted daily on the typewriter" }
+          ]
+        }
+      ]
     },
     {
       "id": "best-book-all-time",
       "label": "Best Book (All book club years)",
       "prompt": "Best Book (All book club years)",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "abhorsen",
+          "display_name": "Abhorsen",
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "Abhorsen" }
+          ]
+        },
+        {
+          "id": "the-starless-sea",
+          "display_name": "The Starless Sea",
+          "aliases": [
+            "Starless Sea",
+            "starless sea"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Starless Sea" },
+            { "submitter": "Ivy", "rank": 1, "raw_text": "starless sea" },
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "Starless Sea" }
+          ]
+        },
+        {
+          "id": "the-three-body-problem",
+          "display_name": "The Three-Body Problem",
+          "aliases": [
+            "Three Body Problem"
+          ],
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Three Body Problem" }
+          ]
+        }
+      ]
     },
     {
       "id": "book-to-re-read",
       "label": "Book to re-read (All book club years)",
       "prompt": "Book to re-read (All book club years)",
-      "nominations": []
+      "nominations": [
+        {
+          "id": "the-continent",
+          "display_name": "The Continent",
+          "aliases": [
+            "The Continent – (was it really racist?)"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 1, "raw_text": "The Continent – (was it really racist?)" }
+          ]
+        },
+        {
+          "id": "jane-unlimited",
+          "display_name": "Jane, Unlimited",
+          "aliases": [
+            "Jane unlimited"
+          ],
+          "mentions": [
+            { "submitter": "Chris", "rank": 2, "raw_text": "Jane, Unlimited" },
+            { "submitter": "Ivy", "rank": 2, "raw_text": "Jane unlimited" }
+          ]
+        },
+        {
+          "id": "the-night-circus",
+          "display_name": "The Night Circus",
+          "mentions": [
+            { "submitter": "Ivy", "rank": 1, "raw_text": "night circus" }
+          ]
+        },
+        {
+          "id": "the-seven-and-a-half-deaths-of-evelyn-hardcastle",
+          "display_name": "The 7½ Deaths of Evelyn Hardcastle",
+          "aliases": [
+            "7 1/2 deaths Evelyn hardcastle"
+          ],
+          "mentions": [
+            { "submitter": "Ivy", "rank": 3, "raw_text": "7 1/2 deaths Evelyn hardcastle" }
+          ]
+        },
+        {
+          "id": "sabriel",
+          "display_name": "Sabriel",
+          "aliases": [
+            "Sabriel by Garth Nix"
+          ],
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 1, "raw_text": "Sabriel by Garth Nix" }
+          ]
+        },
+        {
+          "id": "small-favors",
+          "display_name": "Small Favors",
+          "mentions": [
+            { "submitter": "Sylvia", "rank": 2, "raw_text": "Small Favors" }
+          ]
+        }
+      ]
     }
   ]
 }

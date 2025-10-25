@@ -127,3 +127,51 @@ what if we had the notes + our talking points – bet.
     - Jane unlimited
         -7 1/2 deaths Evelyn hardcastle
 ```
+
+## Sylvia
+```
+## Categories for the voting:
+1. "Example"
+    - First place
+    - Second Place
+    - etc...
+1. "Best Book"
+    - Book of Door
+    - Mickey 7
+1. "Best Character"
+    - Haymitch Abernathy
+    - Mickey Barnes
+1. "Worst Book"
+    - Toto
+    - Pines
+1. "Worst Character"
+    - Emmit (Briardark)
+    - Icelyn (The Threat Below)
+1. "Best Plot Twist"
+    - When we find out that June’s daughter Annie was the family friend her granny grew up with
+    - when we find out “The Woman” is full of malice and evil after a piece of Hugo Barbery corrupted her as a child in the city
+1. "Memorable Use of Imagery"
+    - there was something to do with the June Farrow book that I can’t remember now 🤣
+    - Running/Hiding in the forest from the Threat Belows, their two-toned howls, fast speed, tall strong humanoids with talons
+1. "Attractive Character"
+    - Eamon Stone (The Unmaking of June Farrow)
+    - Adorane (The Threat Below)
+1. "Supporting Character"
+    - Maysilee Donner (Sunrise on the Reaping)
+    - Berto Gomez (Mickey 7)
+1. "Original Concept"
+    - The Witchstone
+    - The Threat Below
+1. "Most Anticipated Before Reading"
+    - Sunrise in the Reaping
+    - Briardark
+1. "Most Memorable Book Club Moment"
+    - n/a
+    - n/a
+1. "Best Book (All book club years)"
+    - Starless Sea
+    - Three Body Problem
+1. "Book to re-read (All book club years)"
+    - Sabriel by Garth Nix
+    - Small Favors
+```
