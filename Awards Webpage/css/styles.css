@@ -185,6 +185,54 @@ main {
   outline: none;
 }
 
+.diagnostics-source-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.diagnostics-source-label {
+  font-weight: 600;
+  color: #ffdd55;
+}
+
+.diagnostics-source-link {
+  color: #9ad5ff;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(154, 213, 255, 0.6);
+  padding-bottom: 0.1rem;
+}
+
+.diagnostics-source-link:focus-visible,
+.diagnostics-source-link:hover {
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.85);
+}
+
+.diagnostics-refresh {
+  background-color: rgba(154, 213, 255, 0.12);
+  border: 1px solid rgba(154, 213, 255, 0.4);
+  color: #e6f4ff;
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.diagnostics-refresh:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.diagnostics-refresh:hover:not(:disabled),
+.diagnostics-refresh:focus-visible:not(:disabled) {
+  background-color: rgba(154, 213, 255, 0.3);
+  transform: translateY(-1px);
+  outline: none;
+}
+
 .diagnostics-status {
   margin: 0;
   color: #ffdd55;

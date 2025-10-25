@@ -558,11 +558,16 @@
   }
 
   function resolveEmbeddedCatalog(options) {
+    if (options && options.disableEmbedded) {
+      return null;
+    }
+
     if (options && Object.prototype.hasOwnProperty.call(options, 'embeddedData')) {
       const normalized = normalizeEmbeddedCandidate(options.embeddedData);
       if (normalized) {
         return { catalog: normalized, source: 'options' };
       }
+      return null;
     }
 
     if (typeof globalThis !== 'undefined') {

@@ -318,6 +318,55 @@ test('loadAwardsData consumes embedded awards snapshot when network strategies a
   }
 });
 
+test('loadAwardsData respects disableEmbedded to bypass global snapshots', async () => {
+  const originalGlobal = global.AwardsEmbeddedData;
+  const staleSnapshot = {
+    manifestBase: 'years',
+    get() {
+      return {
+        base: 'years',
+        path: '2025/nominations/2025-award-nominations.json',
+        format: 'normalized-nominations',
+        title: 'Stale embedded data',
+        data: {
+          year: '2025',
+          title: 'Outdated Snapshot',
+          categories: [
+            {
+              category: 'Test Category',
+              nominations: ['Outdated Entry'],
+              winner: '',
+              runnerUp: ''
+            }
+          ]
+        }
+      };
+    }
+  };
+
+  global.AwardsEmbeddedData = staleSnapshot;
+
+  try {
+    const payload = await loader.loadAwardsData({
+      year: '2025',
+      basePath: 'years',
+      fetchImpl: fileFetch,
+      disableEmbedded: true
+    });
+
+    assert.equal(payload.year, '2025');
+    assert.notEqual(payload.title, 'Outdated Snapshot');
+    const categories = payload.categories.map(category => category.category);
+    assert.ok(categories.includes('Best Book'), 'canonical categories should be present');
+  } finally {
+    if (typeof originalGlobal === 'undefined') {
+      delete global.AwardsEmbeddedData;
+    } else {
+      global.AwardsEmbeddedData = originalGlobal;
+    }
+  }
+});
+
 test('embedded awards snapshot stays aligned with canonical manifest for 2025', async () => {
   const canonical = await loader.loadAwardsData({
     year: '2025',
