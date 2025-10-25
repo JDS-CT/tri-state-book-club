@@ -1,17 +1,11 @@
 # TODO
 
 TEST -- using AGENTS.md file
-✅ [p1] Investigate why the ceremony page stalls on "Loading…" when opened locally and trace the awards data request path.
-✅ [p1] Update `Awards Webpage/js/awardsLoader.js` so file:// origins skip the hanging `fetch` attempt and rely on the resilient XHR fallback.
-✅ [p1] Add a regression test in `tests/awards-loader.test.js` proving the file:// bypass loads 2024 data without invoking `fetch`.
-✅ [p1] Restore awards data loading so selecting 2024 (and earlier years) renders ceremony content from `years/<year>/awards.json`.
-✅ [p1] Add regression tests in `tests/awards-loader.test.js` covering successful data fetch and rendering for the default year.
-✅ [p2] Implement animated background that drifts award-related words from the selected year and earlier using the existing layout.
-✅ [p2] Ensure background word animation logic is testable with unit coverage for filtering eligible terms.
-✅ [p2] Document annual awards workflow referencing `years/<year>/` archives.
-✅ [p1] Restore awards loader support when running the site over file:// by adding a resilient fallback in `js/awardsLoader.js`.
-✅ [p1] Add regression tests in `tests/awards-loader.test.js` covering the new offline-safe loading path.
-✅ [p1] Add embedded awards data fallback in `Awards Webpage/js/awardsLoader.js` so diagnostics recover when network access is blocked.
-✅ [p1] Extend `tests/awards-loader.test.js` to cover the embedded fallback success path and diagnostics events.
-🔲 [p3] Plan website updates so the awards site can surface multiple years with navigation and data-driven pages.
+✅ [p1] Move the diagnostics console into a dedicated "Diagnostics" tab within `Awards Webpage/index.html`.
+✅ [p1] Update the tab controller in `Awards Webpage/js/script.js` so the diagnostics view registers correctly and refreshes when activated.
+✅ [p1] Expand `years/2023/reveal/awards.json` to follow the 2024 schema, filling known data and annotating gaps for missing records.
+✅ [p1] Draft a partial 2025 awards dataset in `years/2025/reveal/awards.json` using available nominations and clearly marking outstanding responses.
+✅ [p2] Add a "Settings" tab to `Awards Webpage/index.html` with dropdowns for winner and reveal sound effects.
+✅ [p2] Persist the selected sound effect settings in `Awards Webpage/js/script.js`, including unit tests covering defaults and custom choices.
+🔲 [p3] Coordinate refreshed ceremony audio synthesis compatible with the new settings options once binary delivery is possible.
 🔲 [p4] Research and document tooling to assist with ranked-choice vote aggregation ahead of winner selection.

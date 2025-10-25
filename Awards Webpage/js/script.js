@@ -13,13 +13,39 @@ const awardsCache = new Map();
 let backgroundUpdateToken = 0;
 let diagnosticsChannel = null;
 let diagnosticsConsoleInstance = null;
+let settingsController = null;
+let audioSettings = null;
+let settingsInitialized = false;
+
+const SettingsModule = typeof AwardsSettings !== 'undefined' ? AwardsSettings : null;
+const SOUND_OPTIONS = SettingsModule ? SettingsModule.SOUND_OPTIONS : {
+  revealSound: [
+    { id: 'explosion', label: 'Classic Explosion', src: 'audio/explosion.mp3' },
+    { id: 'explosion_rev1', label: 'Echoing Explosion', src: 'audio/explosion_rev1.mp3' }
+  ],
+  winnerSound: [
+    { id: 'winner_fanfare', label: 'Triumphant Fanfare', src: 'audio/winner_fanfare.mp3' },
+    { id: 'three_thirty_four', label: 'Three Thirty Four Theme', src: 'audio/threeThirtyFour.mp3' }
+  ]
+};
+const SETTINGS_STORAGE_KEY = SettingsModule && SettingsModule.STORAGE_KEY
+  ? SettingsModule.STORAGE_KEY
+  : 'book-club-awards-settings';
+const DEFAULT_AUDIO_SETTINGS = SettingsModule && typeof SettingsModule.normalizeSettings === 'function'
+  ? SettingsModule.normalizeSettings(SettingsModule.DEFAULTS)
+  : {
+      revealSound: (SOUND_OPTIONS.revealSound[0] && SOUND_OPTIONS.revealSound[0].id) || 'explosion',
+      winnerSound: (SOUND_OPTIONS.winnerSound[0] && SOUND_OPTIONS.winnerSound[0].id) || 'winner_fanfare'
+    };
 
 const viewRenderers = {
   reveal: () => {},
   nominations: renderNominationsView,
   winners: renderWinnersView,
   data: renderDataExchangeView,
-  voting: renderVotingPrototypeView
+  diagnostics: renderDiagnosticsView,
+  voting: renderVotingPrototypeView,
+  settings: renderSettingsView
 };
 
 function setStatusMessage(text, isError = false) {
@@ -170,6 +196,210 @@ function requestBackgroundUpdate(year) {
 
 function getCategoryNames() {
   return awards.map(entry => entry.category);
+}
+
+function normalizeAudioSettings(settings) {
+  if (SettingsModule && typeof SettingsModule.normalizeSettings === 'function') {
+    return SettingsModule.normalizeSettings(settings);
+  }
+  const source = settings && typeof settings === 'object' ? settings : {};
+  const normalized = {};
+  ['revealSound', 'winnerSound'].forEach(key => {
+    const options = SOUND_OPTIONS[key] || [];
+    const fallback = DEFAULT_AUDIO_SETTINGS[key] || (options[0] && options[0].id) || '';
+    const candidate = source[key];
+    if (options.some(option => option.id === candidate)) {
+      normalized[key] = candidate;
+    } else {
+      normalized[key] = fallback;
+    }
+  });
+  return normalized;
+}
+
+function resolveSoundOption(key, value) {
+  const options = SOUND_OPTIONS[key] || [];
+  if (!options.length) {
+    return null;
+  }
+  const match = options.find(option => option.id === value);
+  return match || options[0];
+}
+
+function applyAudioSettingsToUi(settings) {
+  const revealAudio = document.getElementById('explosionSound');
+  const winnerAudio = document.getElementById('winnerSound');
+  const revealOption = resolveSoundOption('revealSound', settings.revealSound);
+  const winnerOption = resolveSoundOption('winnerSound', settings.winnerSound);
+
+  if (revealAudio && revealOption) {
+    const currentSrc = revealAudio.getAttribute('src');
+    if (currentSrc !== revealOption.src) {
+      revealAudio.setAttribute('src', revealOption.src);
+      revealAudio.pause();
+      revealAudio.currentTime = 0;
+      if (typeof revealAudio.load === 'function') {
+        revealAudio.load();
+      }
+    }
+  }
+
+  if (winnerAudio && winnerOption) {
+    const currentSrc = winnerAudio.getAttribute('src');
+    if (currentSrc !== winnerOption.src) {
+      winnerAudio.setAttribute('src', winnerOption.src);
+      winnerAudio.pause();
+      winnerAudio.currentTime = 0;
+      if (typeof winnerAudio.load === 'function') {
+        winnerAudio.load();
+      }
+    }
+  }
+
+  const revealSelect = document.getElementById('revealSoundSelect');
+  if (revealSelect && revealOption) {
+    revealSelect.value = revealOption.id;
+  }
+
+  const winnerSelect = document.getElementById('winnerSoundSelect');
+  if (winnerSelect && winnerOption) {
+    winnerSelect.value = winnerOption.id;
+  }
+}
+
+function getPersistentStorage() {
+  try {
+    const storage = window.localStorage;
+    const probeKey = `${SETTINGS_STORAGE_KEY}::probe`;
+    storage.setItem(probeKey, 'ok');
+    storage.removeItem(probeKey);
+    return storage;
+  } catch (error) {
+    return null;
+  }
+}
+
+function createFallbackSettingsController(storage) {
+  const store = storage && typeof storage.getItem === 'function' ? storage : null;
+  return {
+    load() {
+      if (!store) {
+        return normalizeAudioSettings(DEFAULT_AUDIO_SETTINGS);
+      }
+      try {
+        const raw = store.getItem(SETTINGS_STORAGE_KEY);
+        if (!raw) {
+          return normalizeAudioSettings(DEFAULT_AUDIO_SETTINGS);
+        }
+        const parsed = JSON.parse(raw);
+        return normalizeAudioSettings(parsed);
+      } catch (error) {
+        return normalizeAudioSettings(DEFAULT_AUDIO_SETTINGS);
+      }
+    },
+    save(settings) {
+      const normalized = normalizeAudioSettings(settings);
+      if (store) {
+        try {
+          store.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(normalized));
+        } catch (error) {
+          // Storage may be unavailable (private browsing, quota errors, etc.).
+        }
+      }
+      return normalized;
+    },
+    normalize: normalizeAudioSettings
+  };
+}
+
+function getSettingsController() {
+  if (settingsController) {
+    return settingsController;
+  }
+  const storage = getPersistentStorage();
+  if (SettingsModule && typeof SettingsModule.createController === 'function') {
+    settingsController = SettingsModule.createController(storage);
+  } else {
+    settingsController = createFallbackSettingsController(storage);
+  }
+  return settingsController;
+}
+
+function populateSoundSelect(select, key) {
+  if (!select) {
+    return;
+  }
+  const options = SOUND_OPTIONS[key] || [];
+  select.innerHTML = '';
+  options.forEach(option => {
+    const opt = document.createElement('option');
+    opt.value = option.id;
+    opt.textContent = option.label;
+    select.appendChild(opt);
+  });
+}
+
+function updateAudioSettings(nextSettings, options = {}) {
+  const controller = getSettingsController();
+  const base = audioSettings || normalizeAudioSettings(DEFAULT_AUDIO_SETTINGS);
+  const merged = Object.assign({}, base, nextSettings || {});
+  const normalized = controller && typeof controller.normalize === 'function'
+    ? controller.normalize(merged)
+    : normalizeAudioSettings(merged);
+  audioSettings = normalized;
+  applyAudioSettingsToUi(normalized);
+  if (!options.skipPersist && controller && typeof controller.save === 'function') {
+    controller.save(normalized);
+  }
+  return normalized;
+}
+
+function initializeSettingsView() {
+  if (settingsInitialized) {
+    return;
+  }
+  const revealSelect = document.getElementById('revealSoundSelect');
+  const winnerSelect = document.getElementById('winnerSoundSelect');
+  if (!revealSelect || !winnerSelect) {
+    return;
+  }
+
+  populateSoundSelect(revealSelect, 'revealSound');
+  populateSoundSelect(winnerSelect, 'winnerSound');
+
+  const controller = getSettingsController();
+  const loaded = controller && typeof controller.load === 'function'
+    ? controller.load()
+    : normalizeAudioSettings(DEFAULT_AUDIO_SETTINGS);
+  updateAudioSettings(loaded, { skipPersist: true });
+
+  const handleChange = event => {
+    const target = event.target;
+    if (!target || !target.name) {
+      return;
+    }
+    updateAudioSettings({ [target.name]: target.value });
+  };
+
+  revealSelect.addEventListener('change', handleChange);
+  winnerSelect.addEventListener('change', handleChange);
+
+  settingsInitialized = true;
+}
+
+function renderDiagnosticsView() {
+  if (diagnosticsConsoleInstance && typeof diagnosticsConsoleInstance.render === 'function') {
+    diagnosticsConsoleInstance.render();
+  }
+}
+
+function renderSettingsView() {
+  initializeSettingsView();
+  if (!audioSettings) {
+    updateAudioSettings(DEFAULT_AUDIO_SETTINGS, { skipPersist: true });
+  } else {
+    applyAudioSettingsToUi(audioSettings);
+  }
 }
 
 function showView(viewId) {
@@ -750,6 +980,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   initializeExchangeImport();
   initializeVotingForm();
+  initializeSettingsView();
 
   diagnosticsChannel = AwardsLoader.createDiagnosticsChannel();
 
