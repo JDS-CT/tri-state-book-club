@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2025-10-26T18:15:00Z
+- feat: complete p1 nomination intake – Logged Sylvia's final responses in `years/2025/nominations/2025-raw-submissions.md` alongside Chris and Ivy.
+- feat: complete p1 normalization pass – Populated `years/2025/nominations/2025-award-nominations.json` with merged nominees, aliases, and ranked mentions for all three submitters.
+- feat: complete p2 ballot prep – Added `years/2025/voting/2025-ranked-ballot-options.md` and synchronized `Awards Webpage/js/script_2025.js` to display the consolidated nomination slate for voting setup.
+
 ## 2025-10-25T02:45:00Z
 - feat: synthesize a Four-Dimensional Tombstone winner cue via `Awards Webpage/js/audioCues.js`, exposing a reusable ceremony audio manager.
 - feat: integrate the cue manager with `Awards Webpage/js/script.js`, the ceremony settings UI, and embed the new script in `Awards Webpage/index.html`.
