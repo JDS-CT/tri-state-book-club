@@ -47,6 +47,252 @@ const DEFAULT_AUDIO_SETTINGS = SettingsModule && typeof SettingsModule.normalize
       winnerSound: (SOUND_OPTIONS.winnerSound[0] && SOUND_OPTIONS.winnerSound[0].id) || 'winner_fanfare'
     };
 
+const VIDEO_LIBRARY = {
+  '2025': {
+    basePath: '../years/2025/videos',
+    sequence: [
+      '01-best-book.mp4',
+      '02-best-character.mp4',
+      '03-worst-book.mp4',
+      '04-worst-character.mp4',
+      '05-best-plot-twist.mp4',
+      '06-memorable-use-of-imagery.mp4',
+      '07-attractive-character.mp4',
+      '08-supporting-character.mp4',
+      '09-original-concept.mp4',
+      '10-most-anticipated-before-reading.mp4',
+      '11-most-memorable-book-club-moment.mp4',
+      '12-best-book-of-all-time.mp4',
+      '13-book-to-re-read.mp4'
+    ],
+    categories: {
+      'best book': '01-best-book.mp4',
+      'best character': '02-best-character.mp4',
+      'worst book': '03-worst-book.mp4',
+      'worst character': '04-worst-character.mp4',
+      'best plot twist': '05-best-plot-twist.mp4',
+      'memorable use of imagery': '06-memorable-use-of-imagery.mp4',
+      'attractive character': '07-attractive-character.mp4',
+      'supporting character': '08-supporting-character.mp4',
+      'original concept': '09-original-concept.mp4',
+      'most anticipated before reading': '10-most-anticipated-before-reading.mp4',
+      'most memorable book club moment': '11-most-memorable-book-club-moment.mp4',
+      'best book of all time': '12-best-book-of-all-time.mp4',
+      'book to re-read (all book club years)': '13-book-to-re-read.mp4',
+      'book to re-read': '13-book-to-re-read.mp4'
+    }
+  }
+};
+
+function normalizeVideoKey(value) {
+  if (typeof value !== 'string') {
+    return '';
+  }
+  return value.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+}
+
+function resolveWinnerVideoSource(year, awardIndex, category) {
+  const key = String(year || '');
+  const library = VIDEO_LIBRARY[key];
+  if (!library) {
+    return null;
+  }
+
+  let filename = null;
+  if (Array.isArray(library.sequence) && typeof awardIndex === 'number') {
+    if (awardIndex >= 0 && awardIndex < library.sequence.length) {
+      filename = library.sequence[awardIndex];
+    }
+  }
+
+  const normalizedCategory = normalizeVideoKey(category);
+  if (normalizedCategory && library.categories && library.categories[normalizedCategory]) {
+    filename = library.categories[normalizedCategory];
+  }
+
+  if (!filename) {
+    return null;
+  }
+
+  const base = (library.basePath || '').replace(/\/?$/, '');
+  if (!base) {
+    return filename;
+  }
+  return `${base}/${filename}`;
+}
+
+function hideWinnerVideoDisplay() {
+  const container = document.getElementById('winnerVideoContainer');
+  const video = document.getElementById('winnerVideo');
+  const caption = document.getElementById('winnerVideoCaption');
+
+  if (container) {
+    container.hidden = true;
+    container.setAttribute('aria-hidden', 'true');
+    container.removeAttribute('data-visible');
+  }
+
+  if (video) {
+    try {
+      video.pause();
+    } catch (_) {
+      /* pause best-effort */
+    }
+    if (typeof video.currentTime === 'number') {
+      try {
+        video.currentTime = 0;
+      } catch (_) {
+        /* ignore reset failures */
+      }
+    }
+  }
+
+  if (caption) {
+    caption.textContent = '';
+  }
+
+  const button = document.getElementById('revealVideoButton');
+  if (button && button.dataset.videoSrc) {
+    button.textContent = 'Reveal Winner Video';
+  }
+}
+
+function resetWinnerVideoState() {
+  hideWinnerVideoDisplay();
+  const button = document.getElementById('revealVideoButton');
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Reveal Winner Video';
+    button.removeAttribute('data-video-src');
+    button.removeAttribute('data-video-category');
+    button.removeAttribute('data-video-year');
+  }
+
+  const video = document.getElementById('winnerVideo');
+  if (video && video.hasAttribute('src')) {
+    video.removeAttribute('src');
+    try {
+      video.load();
+    } catch (_) {
+      /* ignore reload failures */
+    }
+  }
+}
+
+function prepareWinnerVideo(award, context) {
+  const button = document.getElementById('revealVideoButton');
+  if (!button || !award) {
+    resetWinnerVideoState();
+    return;
+  }
+
+  hideWinnerVideoDisplay();
+
+  const year = context && context.year ? context.year : activeYear;
+  const index = context && typeof context.index === 'number' ? context.index : null;
+  const source = resolveWinnerVideoSource(year, index, award.category);
+  if (!source) {
+    button.disabled = true;
+    button.textContent = 'No Video Available';
+    button.removeAttribute('data-video-src');
+    button.removeAttribute('data-video-category');
+    button.removeAttribute('data-video-year');
+    return;
+  }
+
+  button.disabled = false;
+  button.textContent = 'Reveal Winner Video';
+  button.dataset.videoSrc = source;
+  button.dataset.videoCategory = award.category || '';
+  button.dataset.videoYear = year || '';
+}
+
+function setWinnerVideoAvailability(year) {
+  const button = document.getElementById('revealVideoButton');
+  const container = document.getElementById('winnerVideoContainer');
+  const key = String(year || '');
+  const hasLibrary = Boolean(VIDEO_LIBRARY[key]);
+
+  if (button) {
+    button.hidden = !hasLibrary;
+    button.setAttribute('aria-hidden', hasLibrary ? 'false' : 'true');
+    if (!hasLibrary) {
+      button.disabled = true;
+      button.textContent = 'Reveal Winner Video';
+      button.removeAttribute('data-video-src');
+      button.removeAttribute('data-video-category');
+      button.removeAttribute('data-video-year');
+    }
+  }
+
+  if (container && !hasLibrary) {
+    container.hidden = true;
+    container.setAttribute('aria-hidden', 'true');
+    container.removeAttribute('data-visible');
+  }
+
+  if (!hasLibrary) {
+    const video = document.getElementById('winnerVideo');
+    if (video && video.hasAttribute('src')) {
+      video.removeAttribute('src');
+      try {
+        video.load();
+      } catch (_) {
+        /* ignore */
+      }
+    }
+  }
+}
+
+function toggleWinnerVideo() {
+  const button = document.getElementById('revealVideoButton');
+  const container = document.getElementById('winnerVideoContainer');
+  const video = document.getElementById('winnerVideo');
+  const caption = document.getElementById('winnerVideoCaption');
+
+  if (!button || !container || !video) {
+    return;
+  }
+
+  const source = button.dataset.videoSrc;
+  if (!source) {
+    return;
+  }
+
+  const isVisible = container.getAttribute('data-visible') === 'true';
+  if (isVisible) {
+    hideWinnerVideoDisplay();
+    return;
+  }
+
+  if (video.getAttribute('src') !== source) {
+    video.setAttribute('src', source);
+    try {
+      video.load();
+    } catch (_) {
+      /* ignore load failures */
+    }
+  }
+
+  if (caption) {
+    const category = button.dataset.videoCategory || 'Winner Video';
+    const yearLabel = button.dataset.videoYear ? ` — ${button.dataset.videoYear}` : '';
+    caption.textContent = `${category}${yearLabel}`;
+  }
+
+  container.hidden = false;
+  container.setAttribute('aria-hidden', 'false');
+  container.setAttribute('data-visible', 'true');
+  button.textContent = 'Hide Winner Video';
+
+  const playAttempt = video.play();
+  if (playAttempt && typeof playAttempt.then === 'function') {
+    playAttempt.catch(() => {
+      /* autoplay can be blocked; controls remain available */
+    });
+  }
+}
+
 const viewRenderers = {
   reveal: () => {},
   nominations: renderNominationsView,
@@ -605,6 +851,10 @@ function showView(viewId) {
     }
   });
 
+  if (viewId !== 'reveal') {
+    hideWinnerVideoDisplay();
+  }
+
   currentView = viewId;
   refreshView(viewId);
 }
@@ -943,6 +1193,8 @@ function revealNext() {
     return;
   }
 
+  resetWinnerVideoState();
+
   const contentDiv = document.getElementById('content');
   if (!contentDiv) {
     return;
@@ -1019,6 +1271,7 @@ function revealNext() {
             setTimeout(() => {
               winnerDiv.innerHTML = award.winner;
               winnerDiv.style.opacity = '1';
+              prepareWinnerVideo(award, { year: activeYear, index: currentIndex });
               if (revealButton) {
                 revealButton.disabled = false;
               }
@@ -1045,6 +1298,9 @@ async function loadYearData(year, runtimeOptions = {}) {
     throw new Error('Reveal button missing from the page.');
   }
 
+  setWinnerVideoAvailability(year);
+  resetWinnerVideoState();
+
   revealButton.disabled = true;
   revealButton.textContent = 'Loading…';
   revealButton.style.backgroundColor = '#555';
@@ -1066,6 +1322,9 @@ async function loadYearData(year, runtimeOptions = {}) {
     activeYear = payload.year || year;
     ceremonyTitle = payload.title || '';
     currentIndex = 0;
+
+    setWinnerVideoAvailability(activeYear);
+    resetWinnerVideoState();
 
     rememberAwardsPayload(payload, year);
 
@@ -1157,6 +1416,11 @@ window.addEventListener('DOMContentLoaded', () => {
   initializeExchangeImport();
   initializeVotingForm();
   initializeSettingsView();
+
+  const revealVideoButton = document.getElementById('revealVideoButton');
+  if (revealVideoButton) {
+    revealVideoButton.addEventListener('click', toggleWinnerVideo);
+  }
 
   diagnosticsChannel = AwardsLoader.createDiagnosticsChannel();
 

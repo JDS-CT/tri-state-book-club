@@ -34,7 +34,14 @@
 <main>
   <section id="view-reveal" class="view view-active" role="tabpanel" aria-labelledby="reveal-tab">
     <div id="content" class="status-message">Select a year to load awards.</div>
-    <button id="revealButton" onclick="revealNext()" disabled>Reveal the Winner</button>
+    <div class="reveal-controls">
+      <button id="revealButton" type="button" onclick="revealNext()" disabled>Reveal the Winner</button>
+      <button id="revealVideoButton" type="button" disabled hidden aria-hidden="true">Reveal Winner Video</button>
+    </div>
+    <div id="winnerVideoContainer" class="winner-video" hidden aria-hidden="true">
+      <video id="winnerVideo" class="winner-video__player" controls preload="metadata"></video>
+      <p id="winnerVideoCaption" class="winner-video__caption"></p>
+    </div>
   </section>
 
   <section id="view-nominations" class="view" role="tabpanel" aria-labelledby="nominations-tab" hidden>
