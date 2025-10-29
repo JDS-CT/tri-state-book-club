@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2025-10-29T13:45:00Z
+- feat: complete p1 reveal finalization – Replaced every TBD placeholder in `years/2025/reveal/awards.json` with tallied nominations, winners, and runner-up tie notes for the 2025 ceremony.
+- chore: complete p1 snapshot sync – Reran `node scripts/generate-embedded-awards-data.js` after publishing the reveal results to keep the embedded loader catalog aligned.
+- chore: complete p2 export cleanup – Removed the ingest-only `docs/2025 - Awards Nominations - Tri-State Book Club.csv` source after integrating the standings.
 ## 2025-10-27T14:30:00Z
 - fix: align Min's supporting character entry with the "Rook" title in `years/2025/nominations/2025-award-nominations.json` and regenerate the embedded snapshot for the ceremony site.
 - chore: update `years/2025/voting/2025-ranked-ballot-options.md` so the ranked ballot reference lists Min (the Rook).

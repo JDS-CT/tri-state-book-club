@@ -1,7 +1,6 @@
 {
   "year": "2025",
   "title": "2025 Tri-State Book Club Awards",
-  "notes": "Draft compiled from Chris and Ivy nomination forms (2 of 3 submissions received). Update once the final ballot arrives and tallies are complete.",
   "categories": [
     {
       "category": "Best Book",
@@ -9,132 +8,149 @@
         "<i>The Book of Doors</i>",
         "<i>Sunrise on the Reaping</i>",
         "<i>Briardark</i>",
-        "<em>Awaiting final ballot for additional titles</em>"
+        "<i>Mickey7</i>"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "<i>The Book of Doors</i>",
+      "runnerUp": "<i>Sunrise on the Reaping</i>"
     },
     {
       "category": "Best Character",
       "nominations": [
+        "Haymitch Abernathy (<i>Sunrise on the Reaping</i>)",
         "Cassie Andrews (<i>The Book of Doors</i>)",
-        "Haymitch (<i>Sunrise on the Reaping</i>)",
-        "Izzy (<i>Sunrise on the Reaping</i>)",
-        "Drummond Fox (<i>Briardark</i>)",
-        "<em>Awaiting final ballot for additional characters</em>"
+        "Izzy (<i>The Unmaking of June Farrow</i>)",
+        "Mickey Barnes (<i>Mickey7</i>)"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "Haymitch Abernathy (<i>Sunrise on the Reaping</i>)",
+      "runnerUp": "Cassie Andrews (<i>The Book of Doors</i>) — tied with Izzy (<i>The Unmaking of June Farrow</i>)"
     },
     {
       "category": "Worst Book",
       "nominations": [
         "<i>Pines</i>",
+        "<i>TOTO</i>",
         "<i>Mickey7</i>",
-        "<i>Witchstone</i>",
-        "<em>Awaiting final ballot for additional titles</em>"
+        "<i>The Witchstone</i>"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "<i>Pines</i>",
+      "runnerUp": "<i>TOTO</i>"
     },
     {
       "category": "Worst Character",
       "nominations": [
         "Ethan Burke (<i>Pines</i>)",
         "Adorane (<i>The Threat Below</i>)",
-        "The Woman (<i>The Book of Doors</i>)",
-        "<em>Awaiting final ballot for additional characters</em>"
+        "Icelyn (<i>The Threat Below</i>)",
+        "Emmit (<i>Briardark</i>)",
+        "The Woman (<i>The Book of Doors</i>)"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "Ethan Burke (<i>Pines</i>)",
+      "runnerUp": "Adorane & Icelyn (<i>The Threat Below</i>) — tie for runner-up"
     },
     {
       "category": "Best Plot Twist",
       "nominations": [
-        "Cassie bridges the objects and books worlds (<i>The Society of Unknowable Objects</i>)",
-        "The old man never used the travel book (<i>The Society of Unknowable Objects</i>)",
-        "<em>Awaiting final ballot for additional twists</em>"
+        "The Woman corrupted by Hugo Barbery (<i>The Book of Doors</i>)",
+        "Annie revealed as the family friend (<i>The Unmaking of June Farrow</i>)",
+        "Cassie bridges objects and books (<i>The Society of Unknowable Objects</i>)",
+        "The old man never used the travel book (<i>The Society of Unknowable Objects</i>)"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "The Woman corrupted by Hugo Barbery (<i>The Book of Doors</i>)",
+      "runnerUp": "Annie revealed as the family friend (<i>The Unmaking of June Farrow</i>) — tie with Cassie bridging objects and books"
     },
     {
       "category": "Memorable Use of Imagery",
       "nominations": [
-        "The living books channeling light, shadow, and illusions (<i>The Book of Doors</i>)",
-        "Cassie getting stuck in the past (<i>The Society of Unknowable Objects</i>)",
-        "<em>Awaiting final ballot for additional imagery</em>"
+        "The Book of Despair engulfs the Woman (<i>The Book of Doors</i>)",
+        "Running from the Threat Below in the forest (<i>The Threat Below</i>)",
+        "Cassie trapped in the past (<i>The Book of Doors</i>)",
+        "Living tomes and time slips (<i>The Book of Doors</i>)",
+        "Vivid visions (<i>The Unmaking of June Farrow</i>)"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "The Book of Despair engulfs the Woman (<i>The Book of Doors</i>)",
+      "runnerUp": "Running from the Threat Below in the forest (<i>The Threat Below</i>)"
     },
     {
       "category": "Attractive Character",
       "nominations": [
         "James (<i>The Society of Unknowable Objects</i>)",
+        "Drummond Fox (<i>Briardark</i>)",
+        "Izzy (<i>The Unmaking of June Farrow</i>)",
         "Toto (<i>TOTO</i>)",
-        "Izzy (<i>Sunrise on the Reaping</i>)",
-        "<em>Awaiting final ballot for additional characters</em>"
+        "Eamon Stone (<i>The Unmaking of June Farrow</i>)",
+        "Adorane (<i>The Threat Below</i>)"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "James (<i>The Society of Unknowable Objects</i>)",
+      "runnerUp": "Drummond Fox (<i>Briardark</i>)"
     },
     {
       "category": "Supporting Character",
       "nominations": [
-        "The Woman (<i>The Book of Doors</i>)",
+        "Maysilee Donner (<i>Sunrise on the Reaping</i>)",
         "Eveshone (<i>The Threat Below</i>)",
-        "Min (<i>Sunrise on the Reaping</i>)",
-        "The young tribute whose father aided Haymitch (<i>Sunrise on the Reaping</i>)",
-        "<em>Awaiting final ballot for additional characters</em>"
+        "Ampert Latier (<i>Sunrise on the Reaping</i>)",
+        "Berto Gomez (<i>Mickey7</i>)",
+        "The Woman (<i>The Book of Doors</i>)",
+        "Min (<i>The Rook</i>)"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "Maysilee Donner (<i>Sunrise on the Reaping</i>)",
+      "runnerUp": "Eveshone (<i>The Threat Below</i>)"
     },
     {
       "category": "Original Concept",
       "nominations": [
         "<i>The Book of Doors</i>",
-        "<i>Dreadful</i>",
-        "<i>Witchstone</i>",
+        "<i>The Threat Below</i>",
         "<i>Briardark</i>",
-        "<em>Awaiting final ballot for additional titles</em>"
+        "<i>Dreadful</i>",
+        "<i>The Witchstone</i>"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "<i>The Book of Doors</i>",
+      "runnerUp": "<i>The Threat Below</i>"
     },
     {
       "category": "Most Anticipated Before Reading",
       "nominations": [
         "<i>Sunrise on the Reaping</i>",
-        "<i>TOTO</i>",
         "<i>Briardark</i>",
-        "<i>Dreadful</i>",
-        "<em>Awaiting final ballot for additional titles</em>"
+        "<i>TOTO</i>",
+        "<i>Dreadful</i>"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "<i>Sunrise on the Reaping</i>",
+      "runnerUp": "<i>Briardark</i>"
     },
     {
       "category": "Most Memorable Book Club Moment",
       "nominations": [
-        "Pitch to adopt an AI note-taker for 2026",
         "Karaoke night energy",
-        "The ghost who needed daily greetings on the typewriter",
-        "<em>Awaiting final ballot for additional moments</em>"
+        "Greeting the ghost via daily typewriter notes",
+        "Pitching an AI note-taker for 2026 planning"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "Karaoke night energy",
+      "runnerUp": "Greeting the ghost via daily typewriter notes"
     },
     {
       "category": "Best Book of All Time",
       "nominations": [
-        "<i>Abhorsen</i>",
         "<i>The Starless Sea</i>",
-        "<em>Awaiting final ballot for additional titles</em>"
+        "<i>Abhorsen</i>",
+        "<i>The Three-Body Problem</i>"
       ],
-      "winner": "<span class=\"empty-message\">Winner TBD — pending final tally</span>",
-      "runnerUp": "<span class=\"empty-message\">Runner-up TBD — pending final tally</span>"
+      "winner": "<i>The Starless Sea</i>",
+      "runnerUp": "<i>Abhorsen</i>"
+    },
+    {
+      "category": "Book to re-read (All book club years)",
+      "nominations": [
+        "<i>The Night Circus</i>",
+        "<i>The 7½ Deaths of Evelyn Hardcastle</i>",
+        "<i>Sabriel</i>",
+        "<i>The Continent</i>",
+        "<i>Jane, Unlimited</i>",
+        "<i>Small Favors</i>"
+      ],
+      "winner": "<i>The Night Circus</i>",
+      "runnerUp": "<i>The 7½ Deaths of Evelyn Hardcastle</i>"
     }
   ]
 }
