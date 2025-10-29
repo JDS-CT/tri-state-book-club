@@ -26,8 +26,8 @@
             "<i>Wicked</i>",
             "<i>Good Omens</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Best Character",
@@ -35,8 +35,8 @@
             "Alex (<i>Ninth House</i>)",
             "Elphaba (<i>Wicked</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Worst Book",
@@ -44,8 +44,8 @@
             "<i>Fairy Tale</i>",
             "<i>Verity</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Worst Character",
@@ -53,16 +53,16 @@
             "Aton (<i>Hell Bent</i>)",
             "Flight Killer (<i>Fairy Tale</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Best Plot Twist",
           "nominations": [
             "Self-fulfilling time tear created by the protagonist (<i>Sea of Tranquility</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Memorable Use of Imagery",
@@ -70,16 +70,16 @@
             "Meta references to internal books with a soft fourth-wall break (<i>Sea of Tranquility</i>)",
             "Interdimensional transportation via wheel walking (<i>Hell Bent</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Attractive Character",
           "nominations": [
             "Alex Stern (<i>Ninth House</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Supporting Character",
@@ -87,16 +87,16 @@
             "Darlington (<i>Ninth House</i>)",
             "Trip (<i>Hell Bent</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Original Concept",
           "nominations": [
             "<i>Nettle and Bone</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Most Anticipated Before Reading",
@@ -104,16 +104,16 @@
             "<i>Hell Bent</i>",
             "<i>Fairy Tale</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Most Memorable Book Club Moment",
           "nominations": [
             "Pennsylvania trip photos"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         },
         {
           "category": "Best Book of All Time",
@@ -121,8 +121,8 @@
             "<i>Library at Mount Char</i>",
             "<i>Starless Sea</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<span class=\"empty-message\">Winner TBD — awaiting archival data</span>",
+          "runnerUp": "<span class=\"empty-message\">Runner-up TBD — awaiting archival data</span>"
         }
       ]
     }
@@ -144,8 +144,8 @@
             "<i>The Last Murder at the End of the World</i>",
             "<i>The Three-Body Problem Series</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>Mister Magic</i>",
+          "runnerUp": "<i>The Three-Body Problem Series</i>"
         },
         {
           "category": "Best Character",
@@ -156,8 +156,8 @@
             "The Four-Dimensional Tombstone (<i>The Three-Body Problem</i>)",
             "Wallfacer Luo Ji (<i>The Dark Forest</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "Val (<i>Mister Magic</i>)",
+          "runnerUp": "Emory (<i>The Last Murder at the End of the World</i>)"
         },
         {
           "category": "Worst Book",
@@ -167,8 +167,8 @@
             "<i>Intercepts</i>",
             "<i>The Mysterious Case of the Alperton Angels</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>Until the End of the World</i>",
+          "runnerUp": "<i>The Mysterious Case of the Alperton Angels</i>"
         },
         {
           "category": "Worst Character",
@@ -180,8 +180,8 @@
             "Mister Magic (<i>Character</i>)",
             "Oliver Menzies (<i>The Mysterious Case of the Alperton Angels</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "Christopher (<i>The Calling</i>)",
+          "runnerUp": "Mayor (<i>Mister Magic</i>)"
         },
         {
           "category": "Best Plot Twist",
@@ -192,8 +192,8 @@
             "The Calling (<i>When the super ninja-like Chiocco ended up dying because she was crushed by a random rock.</i>)",
             "The Three (<i>Body Problem Series - Luo Ji's hidden plan Luo Ji's not actually being as haggered as we were lead to believe, he had a better plan and had everyone convinced to dismiss him.</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>Last Murder at the End of the World</i> - The villagers could walk through the fog",
+          "runnerUp": "<i>Mister Magic</i> - Revelation of the true nature of the children's show"
         },
         {
           "category": "Memorable Use of Imagery",
@@ -204,8 +204,8 @@
             "The in between world with caves of lit candles the Merrick watches over (<i>Thirteenth Child</i>)",
             "The world building in Three Body Problem for the VR game (<i>The Three-Body Problem</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "The in-between world of lit candles (<i>Thirteenth Child</i>)",
+          "runnerUp": "Mirror reflections with Vesper Wright (<i>Black Sheep</i>)"
         },
         {
           "category": "Attractive Character",
@@ -216,8 +216,8 @@
             "Maccabee (<i>The Calling</i>) - (<i>6'5, tall dark and handsome</i>)",
             "Prince Leopold (<i>Thirteenth Child</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "Aa (<i>Death's End</i>)",
+          "runnerUp": "Alexander's Triplets (<i>House of Roots and Ruin</i>)"
         },
         {
           "category": "Supporting Character",
@@ -228,8 +228,8 @@
             "Hilal (<i>The Calling</i>) Tried to get the players to work together peacefully at the beginning of Endgame",
             "The Divided Ones (<i>Thirteenth Child</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "Benji the Gay Cowboy (<i>Until the End of the World</i>)",
+          "runnerUp": "Aa (<i>Death's End</i>)"
         },
         {
           "category": "Original Concept",
@@ -239,8 +239,8 @@
             "<i>Mister Magic</i>",
             "<i>The Last Murder at the End of the World</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>Three Body Problem Series</i>",
+          "runnerUp": "<i>Intercepts</i>"
         },
         {
           "category": "Most Anticipated Before Reading",
@@ -249,8 +249,8 @@
             "<i>The Three-Body Problem</i>",
             "<i>House of Roots and Ruin</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>The Last Murder at the End of the World</i>",
+          "runnerUp": "<i>The Three-Body Problem</i>"
         },
         {
           "category": "Most Memorable Book Club Moment",
@@ -262,8 +262,8 @@
             "Smith's Declaration of Hatred (<i>GPT re-wrote the above nomination like this...</i>)",
             "When Smith said he hates us and hates books (<i>original</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "Sylvia's Miniature Houses",
+          "runnerUp": "Creating Images with GPT for Laughter"
         },
         {
           "category": "Best Book of All Time",
@@ -273,8 +273,8 @@
             "<i>The 7½ Deaths of Evelyn Hardcastle</i>",
             "<i>The Starless Sea</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>The Library at Mount Char</i>",
+          "runnerUp": "<i>The 7½ Deaths of Evelyn Hardcastle</i>"
         }
       ]
     }
@@ -296,8 +296,8 @@
             "<i>Briardark</i>",
             "<i>Mickey7</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>The Book of Doors</i>",
+          "runnerUp": "<i>Sunrise on the Reaping</i>"
         },
         {
           "category": "Best Character",
@@ -307,8 +307,8 @@
             "Izzy (<i>The Unmaking of June Farrow</i>)",
             "Mickey Barnes"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "Haymitch Abernathy (<i>Sunrise on the Reaping</i>)",
+          "runnerUp": "Cassie Andrews (<i>The Book of Doors</i>) — tied with Izzy (<i>The Unmaking of June Farrow</i>)"
         },
         {
           "category": "Worst Book",
@@ -318,8 +318,8 @@
             "<i>The Witchstone</i>",
             "<i>TOTO</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>Pines</i>",
+          "runnerUp": "<i>TOTO</i>"
         },
         {
           "category": "Worst Character",
@@ -330,8 +330,8 @@
             "Emmit (<i>Briardark</i>)",
             "Icelyn (<i>The Threat Below</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "Ethan Burke (<i>Pines</i>)",
+          "runnerUp": "Adorane & Icelyn (<i>The Threat Below</i>) — tie for runner-up"
         },
         {
           "category": "Best Plot Twist",
@@ -341,8 +341,8 @@
             "When we find out that June’s daughter Annie was the family friend her granny grew up with",
             "when we find out “The Woman” is full of malice and evil after a piece of Hugo Barbery corrupted her as a child in the city"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "The Woman corrupted by Hugo Barbery (<i>The Book of Doors</i>)",
+          "runnerUp": "Annie revealed as the family friend (<i>The Unmaking of June Farrow</i>) — tie with Cassie bridging objects and books"
         },
         {
           "category": "Memorable Use of Imagery",
@@ -351,8 +351,8 @@
             "there was something to do with the June Farrow book that I can’t remember now 🤣",
             "Running/Hiding in the forest from the Threat Belows, their two (<i>toned howls, fast speed, tall strong humanoids with talons</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "The Book of Despair engulfs the Woman (<i>The Book of Doors</i>)",
+          "runnerUp": "Running from the Threat Below in the forest (<i>The Threat Below</i>)"
         },
         {
           "category": "Attractive Character",
@@ -364,8 +364,8 @@
             "Eamon Stone (<i>The Unmaking of June Farrow</i>)",
             "Adorane (<i>The Threat Below</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "James (<i>The Society of Unknowable Objects</i>)",
+          "runnerUp": "Drummond Fox (<i>Briardark</i>)"
         },
         {
           "category": "Supporting Character",
@@ -376,8 +376,8 @@
             "Maysilee Donner (<i>Sunrise on the Reaping</i>)",
             "Berto Gomez (<i>Mickey 7</i>)"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "Maysilee Donner (<i>Sunrise on the Reaping</i>)",
+          "runnerUp": "Eveshone (<i>The Threat Below</i>)"
         },
         {
           "category": "Original Concept",
@@ -388,8 +388,8 @@
             "<i>Briardark</i>",
             "<i>The Threat Below</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>The Book of Doors</i>",
+          "runnerUp": "<i>The Threat Below</i>"
         },
         {
           "category": "Most Anticipated Before Reading",
@@ -399,8 +399,8 @@
             "<i>Briardark</i>",
             "<i>Dreadful</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>Sunrise on the Reaping</i>",
+          "runnerUp": "<i>Briardark</i>"
         },
         {
           "category": "Most Memorable Book Club Moment",
@@ -409,8 +409,8 @@
             "Karaoke (<i>hands down – energy the vibe, it was all great!</i>)",
             "the ghost in the house who needed greeted daily on the typewriter"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "Karaoke night energy",
+          "runnerUp": "Greeting the ghost via daily typewriter notes"
         },
         {
           "category": "Best Book (All book club years)",
@@ -432,8 +432,8 @@
             "<i>Sabriel by Garth Nix</i>",
             "<i>Small Favors</i>"
           ],
-          "winner": "",
-          "runnerUp": ""
+          "winner": "<i>The Night Circus</i>",
+          "runnerUp": "<i>The 7½ Deaths of Evelyn Hardcastle</i>"
         }
       ]
     }

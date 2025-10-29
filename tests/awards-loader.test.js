@@ -68,7 +68,7 @@ function createFileBackedXhrFactory() {
   };
 }
 
-test('loadAwardsData resolves canonical nominations for 2025 via manifest lookup', async () => {
+test('loadAwardsData merges canonical nominations with awards winners for 2025', async () => {
   const diagnostics = loader.createDiagnosticsChannel();
   const payload = await loader.loadAwardsData({
     year: '2025',
@@ -97,8 +97,8 @@ test('loadAwardsData resolves canonical nominations for 2025 via manifest lookup
     '<i>Briardark</i>',
     '<i>Mickey7</i>'
   ]);
-  assert.equal(bestBook.winner, '');
-  assert.equal(bestBook.runnerUp, '');
+  assert.equal(bestBook.winner, '<i>The Book of Doors</i>');
+  assert.equal(bestBook.runnerUp, '<i>Sunrise on the Reaping</i>');
 
   const bestCharacter = payload.categories.find(category => category.category === 'Best Character');
   assert.ok(bestCharacter, 'Best Character category should be present');
@@ -114,6 +114,12 @@ test('loadAwardsData resolves canonical nominations for 2025 via manifest lookup
   assert.ok(
     supportingCharacter.nominations.includes('Min (<i>the Rook</i>)'),
     'Min (the Rook) should be highlighted in Supporting Character nominations'
+  );
+
+  const overlayEvents = diagnostics.entries.map(entry => entry.type).filter(type => type.startsWith('overlay'));
+  assert.ok(
+    overlayEvents.includes('overlay:success'),
+    `expected overlay:success event, saw ${overlayEvents.join(', ')}`
   );
 });
 
@@ -137,6 +143,9 @@ test('loadAwardsData retries manifest lookup paths before resolving canonical da
     if (resource === 'years/2025/nominations/2025-award-nominations.json') {
       return fileFetch(resource);
     }
+    if (resource === 'years/2025/reveal/awards.json') {
+      return fileFetch(resource);
+    }
     throw new Error(`Unexpected resource request: ${resource}`);
   }
 
@@ -154,8 +163,14 @@ test('loadAwardsData retries manifest lookup paths before resolving canonical da
     attempts.includes('years/2025/nominations/2025-award-nominations.json'),
     `Expected canonical nominations fetch, saw ${attempts.join(', ')}`
   );
+  assert.ok(
+    attempts.some(candidate => candidate.endsWith('/2025/reveal/awards.json')),
+    `Expected awards overlay fetch, saw ${attempts.join(', ')}`
+  );
   assert.equal(payload.year, '2025');
   assert.equal(payload.categories.length > 0, true);
+  const winners = payload.categories.map(category => category.winner).filter(Boolean);
+  assert.ok(winners.length > 0, 'expected at least one winner after overlay');
 });
 
 test('loadAwardsData falls back to an XMLHttpRequest implementation when fetch fails', async () => {
@@ -174,6 +189,9 @@ test('loadAwardsData falls back to an XMLHttpRequest implementation when fetch f
   assert.equal(attempts > 0, true, 'expected the failing fetch to be invoked');
   assert.equal(payload.year, '2025');
   assert.equal(payload.categories.length > 0, true);
+  const bookCategory = payload.categories.find(category => category.category === 'Best Book');
+  assert.ok(bookCategory, 'Best Book category should be present');
+  assert.equal(bookCategory.winner, '<i>The Book of Doors</i>');
 });
 
 test('loadAwardsData bypasses fetch on file protocol and resolves via XHR fallback', async () => {
@@ -198,6 +216,9 @@ test('loadAwardsData bypasses fetch on file protocol and resolves via XHR fallba
     assert.equal(fetchCallCount, 0, 'fetch should be bypassed on file:// origins');
     assert.equal(payload.year, '2025');
     assert.equal(payload.categories.length > 0, true);
+    const highlighted = payload.categories.find(category => category.category === 'Best Book');
+    assert.ok(highlighted, 'Best Book category should be present');
+    assert.equal(highlighted.winner, '<i>The Book of Doors</i>');
   } finally {
     if (typeof originalFetch === 'undefined') {
       delete global.fetch;
@@ -246,6 +267,7 @@ test('loadAwardsData emits diagnostics for successful fetch resolution', async (
   assert.equal(eventTypes.includes('load:start'), true, 'expected load:start event');
   assert.equal(eventTypes.includes('manifest:success'), true, 'expected manifest success event');
   assert.equal(eventTypes.includes('load:complete'), true, 'expected load:complete event');
+  assert.equal(eventTypes.includes('overlay:success'), true, 'expected overlay:success event');
 });
 
 test('loadAwardsData uses embedded manifest metadata when all network strategies fail', async () => {

@@ -50,6 +50,65 @@
     };
   }
 
+  function hasWinnerText(value) {
+    return typeof value === 'string' && value.trim() !== '';
+  }
+
+  function needsWinnerOverlay(categories) {
+    if (!Array.isArray(categories) || categories.length === 0) {
+      return false;
+    }
+    return categories.some(entry => entry && !hasWinnerText(entry.winner));
+  }
+
+  function normalizeCategoryKey(name) {
+    if (typeof name !== 'string') {
+      return '';
+    }
+    return name.trim().toLowerCase();
+  }
+
+  function overlayWinnerDetails(targetCategories, overlayCategories) {
+    if (!Array.isArray(targetCategories) || !Array.isArray(overlayCategories)) {
+      return false;
+    }
+
+    const overlayMap = new Map();
+    overlayCategories.forEach(category => {
+      if (!category || typeof category !== 'object') {
+        return;
+      }
+      const key = normalizeCategoryKey(category.category);
+      if (!key || overlayMap.has(key)) {
+        return;
+      }
+      overlayMap.set(key, category);
+    });
+
+    let updated = false;
+
+    targetCategories.forEach(category => {
+      if (!category || typeof category !== 'object') {
+        return;
+      }
+      const key = normalizeCategoryKey(category.category);
+      if (!key || !overlayMap.has(key)) {
+        return;
+      }
+      const overlay = overlayMap.get(key);
+      if (!hasWinnerText(category.winner) && hasWinnerText(overlay.winner)) {
+        category.winner = overlay.winner;
+        updated = true;
+      }
+      if (!hasWinnerText(category.runnerUp) && hasWinnerText(overlay.runnerUp)) {
+        category.runnerUp = overlay.runnerUp;
+        updated = true;
+      }
+    });
+
+    return updated;
+  }
+
   function buildResourcePath(base, year) {
     const sanitizedBase = (base || '').replace(/\/?$/, '');
     if (!sanitizedBase) {
@@ -886,6 +945,41 @@
     });
   }
 
+  async function loadAwardsSnapshotFromCandidates(candidates, options) {
+    const { year, fetchFn, xhrFactory, diagnostics } = options;
+    let lastError = null;
+
+    for (const candidate of candidates) {
+      const resource = buildResourcePath(candidate, year);
+      diagnostics.log('overlay:resource', { resource, year });
+
+      if (fetchFn) {
+        try {
+          const result = await loadViaFetch(resource, fetchFn, diagnostics, null, 'overlay-fetch', null);
+          return result;
+        } catch (error) {
+          lastError = error;
+          diagnostics.log('overlay:fetch-error', { resource, message: error && error.message });
+        }
+      }
+
+      if (xhrFactory) {
+        try {
+          const result = await loadViaXhr(resource, xhrFactory, diagnostics, null, 'overlay-xhr', null);
+          return result;
+        } catch (error) {
+          lastError = error;
+          diagnostics.log('overlay:xhr-error', { resource, message: error && error.message });
+        }
+      }
+    }
+
+    if (lastError) {
+      throw lastError;
+    }
+    return null;
+  }
+
   async function loadAwardsData(options) {
     const { year, basePath } = options || {};
 
@@ -928,6 +1022,26 @@
         diagnostics
       });
       if (canonical) {
+        if (needsWinnerOverlay(canonical.categories)) {
+          try {
+            const overlay = await loadAwardsSnapshotFromCandidates(candidates, {
+              year,
+              fetchFn,
+              xhrFactory,
+              diagnostics
+            });
+            if (overlay && Array.isArray(overlay.categories)) {
+              const updated = overlayWinnerDetails(canonical.categories, overlay.categories);
+              if (updated) {
+                diagnostics.log('overlay:success', { year });
+              } else {
+                diagnostics.log('overlay:no-op', { year });
+              }
+            }
+          } catch (overlayError) {
+            diagnostics.log('overlay:failure', { year, message: overlayError && overlayError.message });
+          }
+        }
         return canonical;
       }
     } catch (canonicalError) {
